@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <!-- Include one of jTable styles. -->
+    <link href="Scripts/jtable/themes/metro/blue/jtable.min.css" rel="stylesheet" type="text/css" />
+    <!-- Include jTable script file. -->
+    <!-- <script src="Scripts/jtable/jquery.jtable.min.js" type="text/javascript"></script> -->
+</head>
+<body>
+    <div id="BuildingTableContainer" style="width: 640px; margin: auto;">table</div>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#BuildingTableContainer').jtable({
+                title: 'Building Edit',
+                action: {
+                    //listAction: 'https://localhost:5043//BuildingSelect?format=json',
+                    listAction: function (postData, jtParams) {
+                        return {
+                            "Result": "OK",
+                            "Records": [
+                                { "PK_Building_ID": 1, "Name_Short": "T-Buildins", "Name_Long": "The temp building" },
+
+                            ],
+                            "TotalRecordCount": 1
+                        };
+                    },
+                    createAction: '/BuildingInsert',
+                    updateAction: '/BuildingUpdate',
+                    deleteAction: '/BuildingDelete',
+                },
+                fields: {
+                    PK_Building_Id: {
+                        key: true,
+                        list: false
+                    },
+                    Name_Short: {
+                        title: 'Building Short Name',
+                        width: '20%'
+                    },
+                    Name_Long: {
+                        title: 'Building Long Name',
+                        width: '30%'
+                    }
+                }
+            });
+            $('#BuildingTableContainer').jtable('load');
+        });
+    </script>
+</body>
+
+</html>

@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppVersions_Route.cs" />
+    <Compile Include="Building_Route.cs" />
     <Compile Include="Hello_Request.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

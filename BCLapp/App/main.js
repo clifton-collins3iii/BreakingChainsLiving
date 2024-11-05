@@ -4,9 +4,22 @@
         'durandal': '../Scripts/durandal',
         'plugins': '../Scripts/durandal/plugins',
         'transitions': '../Scripts/durandal/transitions',
+        'bootstrap': '../Scripts/bootstrap',
         'jquery': '../Scripts/jquery-3.7.1',
+        'jquery-ui': '../Scripts/jquery-ui-1-13.3',
         'knockout': '../Scripts/knockout-3.5.1',
+        'jtable': '../Scripts/jtable/jquery.jtable',
         '@servicestack/client': '../ServiceStack/servicestack-client.mjs'
+    },
+    shim: {
+        'jquery-ui': ['jquery'],
+        'bootstrap': {
+            deps: ['jquery', 'jquery-ui'],
+            exports: 'jQuery'
+        },
+        'jtable': {
+            deps: ['jquery', 'jquery-ui']
+        }
     }
 });
 

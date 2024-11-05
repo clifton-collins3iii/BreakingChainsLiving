@@ -150,7 +150,9 @@
   <ItemGroup>
     <Compile Include="DataStore\DbConnection.cs" />
     <Compile Include="dtAppVersions.cs" />
+    <Compile Include="dtBuilding.cs" />
     <Compile Include="Objects\AppVersionObject.cs" />
+    <Compile Include="Objects\BuildingObject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
