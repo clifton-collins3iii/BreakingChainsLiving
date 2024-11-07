@@ -13,18 +13,32 @@
         var compositionComplete = function () {
             $('#BuildingTableContainer').jtable({
                 title: 'Building Edit',
-                action: {
-                    //listAction: 'https://localhost:5043//BuildingSelect?format=json',
-                    listAction: function (postData, jtParams) {
-                        return {
-                            "Result": "OK",
-                            "Records": [
-                                { "PK_Building_ID": 1, "Name_Short": "T-Buildins", "Name_Long": "The temp building" },
+                actions: {
+                    listAction: buildingselect,     // this calls the javascript function buildingselect() below
+                    //listAction: function (postData, jtParams) {
+                    //    return $.Deferred(function ($dfd) {
+                    //        $.ajax({
+                    //            url: 'https://localhost:5043/jTable/BuildingSelect?format=json',
+                    //            type: 'POST',
+                    //            dataType: 'json',
+                    //            data: postData,
+                    //            success: function (data) {
+                    //                $dfd.resolve(data);
+                    //            },
+                    //            error: function () {
+                    //                $dfd.reject();
+                    //            }
+                    //        });
+                    //    });
+                        //return {
+                        //    "Result": "OK",
+                        //    "Records": [
+                        //        { "PK_Building_ID": 1, "Name_Short": "T-Buildins", "Name_Long": "The temp building" },
 
-                            ],
-                            "TotalRecordCount": 1
-                        };
-                    },
+                        //    ],
+                        //    "TotalRecordCount": 1
+                        //};
+                    //},
                     createAction: '/BuildingInsert',
                     updateAction: '/BuildingUpdate',
                     deleteAction: '/BuildingDelete',
@@ -47,6 +61,32 @@
             $('#BuildingTableContainer').jtable('load');
             return true;
         };
+
+        //  Used by jTable listAction method
+        var buildingselect = function (postData, jtParams) {
+            return $.Deferred(function ($dfd) {
+                $.ajax({
+                    url: 'https://localhost:5043/jTable/BuildingSelect',
+                    type: 'POST',
+                    dataType: 'json',
+                    data: postData,
+                    success: function (data) {
+                        $dfd.resolve(data);
+                    },
+                    error: function () {
+                        $dfd.reject();
+                    }
+                });
+            });
+            //return {
+            //    "Result": "OK",
+            //    "Records": [
+            //        { "PK_Building_ID": 1, "Name_Short": "T-Buildins", "Name_Long": "The temp building" },
+
+            //    ],
+            //    "TotalRecordCount": 1
+            //};
+        }
 
         var jtableCallback = function (evt) {
             isLoading(true);

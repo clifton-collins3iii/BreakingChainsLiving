@@ -17,11 +17,8 @@
                     <a data-bind="attr: { href: hash }, html: title"></a>
                 </li>
             </ul>
-            <div class="loader nav navbar-nav navbar-right" data-bind="css: { active: router.isNavigating }">
-                <i class="fa fa-spinner fa-spin fa-2x active"></i>
-            </div>
         </div>
     </div>
 
-    <div class="page-host" data-bind="router: { transition: 'entrance', cacheViews: true }"></div>
+    <div class="page-host" data-bind="router: { transition: 'entrance', cacheViews: false }"></div>
 </div>

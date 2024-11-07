@@ -49,5 +49,22 @@ namespace BCLservice.ServiceModel
         }
     }
 
+    [Route("/jTable/BuildingSelect")]
+    public class jBuildingSelect_Request : IReturn<jBuildingResponse>
+    {
+    }
+
+    public class jBuildingResponse 
+    {
+        public string Result { get; set; }
+        public List<BuildingObject> Records { get; set; }
+        
+        public void New()
+        {
+            this.Records = new List<BuildingObject>();
+            this.Result = string.Empty;
+        }
+    }
+
 }
 

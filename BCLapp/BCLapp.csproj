@@ -218,6 +218,24 @@
     <Content Include="Scripts\jtable\themes\basic\edit.png" />
     <Content Include="Scripts\jtable\themes\basic\jtable_basic.css" />
     <Content Include="Scripts\jtable\themes\basic\jtable_basic.min.css" />
+    <Content Include="Scripts\jtable\themes\jquery-ui-1.13.3\AUTHORS.txt" />
+    <Content Include="Scripts\jtable\themes\jquery-ui-1.13.3\external\jquery\jquery.js" />
+    <Content Include="Scripts\jtable\themes\jquery-ui-1.13.3\images\ui-icons_444444_256x240.png" />
+    <Content Include="Scripts\jtable\themes\jquery-ui-1.13.3\images\ui-icons_555555_256x240.png" />
+    <Content Include="Scripts\jtable\themes\jquery-ui-1.13.3\images\ui-icons_777620_256x240.png" />
+    <Content Include="Scripts\jtable\themes\jquery-ui-1.13.3\images\ui-icons_777777_256x240.png" />
+    <Content Include="Scripts\jtable\themes\jquery-ui-1.13.3\images\ui-icons_cc0000_256x240.png" />
+    <Content Include="Scripts\jtable\themes\jquery-ui-1.13.3\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Scripts\jtable\themes\jquery-ui-1.13.3\index.html" />
+    <Content Include="Scripts\jtable\themes\jquery-ui-1.13.3\jquery-ui.css" />
+    <Content Include="Scripts\jtable\themes\jquery-ui-1.13.3\jquery-ui.js" />
+    <Content Include="Scripts\jtable\themes\jquery-ui-1.13.3\jquery-ui.min.css" />
+    <Content Include="Scripts\jtable\themes\jquery-ui-1.13.3\jquery-ui.min.js" />
+    <Content Include="Scripts\jtable\themes\jquery-ui-1.13.3\jquery-ui.structure.css" />
+    <Content Include="Scripts\jtable\themes\jquery-ui-1.13.3\jquery-ui.structure.min.css" />
+    <Content Include="Scripts\jtable\themes\jquery-ui-1.13.3\jquery-ui.theme.css" />
+    <Content Include="Scripts\jtable\themes\jquery-ui-1.13.3\jquery-ui.theme.min.css" />
+    <Content Include="Scripts\jtable\themes\jquery-ui-1.13.3\LICENSE.txt" />
     <Content Include="Scripts\jtable\themes\jqueryui\add.png" />
     <Content Include="Scripts\jtable\themes\jqueryui\bg-thead.png" />
     <Content Include="Scripts\jtable\themes\jqueryui\close.png" />
@@ -372,6 +390,7 @@
     <Content Include="Scripts\jtable\themes\jtable_theme_base.less" />
     <Content Include="Scripts\jtable\themes\jqueryui\jtable_jqueryui.less" />
     <Content Include="Scripts\jtable\themes\basic\jtable_basic.less" />
+    <Content Include="Scripts\jtable\themes\jquery-ui-1.13.3\package.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
