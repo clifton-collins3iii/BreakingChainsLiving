@@ -2,16 +2,17 @@
     <div class="jumbotron">
         <h1 data-bind="html: displayName"></h1>
         <p data-bind="html: description"></p> 
-        <a class="btn btn-lg btn-primary" href="http://www.durandaljs.com">Go to durandaljs.com -->></a>   
+        <a class="btn btn-lg btn-primary" href="#">Go to Landing -->></a>   
     </div>
     
     <h3>Features</h3>
-    <ul data-bind="foreach: features">
-        <li data-bind="html: $data"></li>
-    </ul>
+    <div id="featurelist" style="column-count: 3;">
+        <ul data-bind="foreach: features">
+            <li data-bind="html: $data"></li>
+        </ul>
+    </div>
     <div class="alert alert-success">
-        <h4>Read Me Please</h4>
-        For information about this template and for general documenation please visit <a href="http://www.durandaljs.com">the official site</a> and if you can't find 
-        answers to your questions there, we hope you will join our <a href="https://groups.google.com/forum/?fromgroups#!forum/durandaljs">google group</a>.
+        <h4>More to Come</h4>
+        New functionality will continue to be implemented for us soon.
     </div>
 </section>

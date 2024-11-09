@@ -1,6 +1,6 @@
 {
   "settings": {
-    "Service": "http://localhost:5000",
+    "Service": "https://localhost:5043",
     "idletimeoutminutes": "20"
   }
 }

@@ -1,19 +1,31 @@
 ﻿define(function () {
     var ctor = function () {
-        this.displayName = 'Starter Kit';
-        this.description = 'Durandal is a cross-device, cross-platform client framework written in JavaScript and designed to make Single Page Applications (SPAs) easy to create and maintain.';
+        this.displayName = 'Breaking Chains Living';
+        this.description = 'A web application to assist in the operations of the organication.';
         this.features = [
-            'Clean MV* Architecture',
-            'JS & HTML Modularity',
-            'Simple App Lifecycle',
-            'Eventing, Modals, Message Boxes, etc.',
-            'Navigation & Screen State Management',
-            'Consistent Async Programming w/ Promises',
-            'App Bundling and Optimization',
-            'Use any Backend Technology',
-            'Built on top of jQuery, Knockout & RequireJS',
-            'Integrates with other libraries such as SammyJS & Bootstrap',
-            'Make jQuery & Bootstrap widgets templatable and bindable (or build your own widgets).'
+            'Building Management',
+            '     --  Lease Management',
+            '     --  Room Management',
+            'Resident Management',
+            '     --  Intake',
+            '     --  Rent, Deposit, Fine and other charges',
+            '     --  Issues history',
+            '     --  Exit Interview',
+            'General Ledger',
+            '     --  Invoice',
+            '     --  Payment',
+            '     --  Accounts Receivable',
+            '     --  Accounts Payable',
+            'Community',
+            '     --  Notices',
+            '     --  News and Information',
+            '     --  Complaints',
+            'Maintenance',
+            '     --  Building request',
+            '     --  Repairs',
+            '     --  Expenses',
+            'Integrates with other systems',
+            '...'
         ];
 
     };

@@ -1,10 +1,11 @@
 ﻿define(['plugins/http', 'durandal/app', 'jquery', 'knockout', 'jtable'],
     function (http, app, $, ko, jtable) {
-    //Note: This module exports an object.
-    //That means that every module that "requires" it will get the same object instance.
-    //If you wish to be able to create multiple instances, instead export a function.
+        //Note: This module exports an object.
+        //That means that every module that "requires" it will get the same object instance.
+        //If you wish to be able to create multiple instances, instead export a function.
         //See the "welcome" module for an example of function export.
         var isLoading = ko.observable(false);
+        var webServiceURL = ko.observable(sessionStorage.getItem('WebService'));
 
         var activate = function () {
             //the router's activator calls this function and waits for it to complete before proceding
@@ -15,33 +16,35 @@
                 title: 'Building Edit',
                 actions: {
                     listAction: buildingselect,     // this calls the javascript function buildingselect() below
-                    //listAction: function (postData, jtParams) {
-                    //    return $.Deferred(function ($dfd) {
-                    //        $.ajax({
-                    //            url: 'https://localhost:5043/jTable/BuildingSelect?format=json',
-                    //            type: 'POST',
-                    //            dataType: 'json',
-                    //            data: postData,
-                    //            success: function (data) {
-                    //                $dfd.resolve(data);
-                    //            },
-                    //            error: function () {
-                    //                $dfd.reject();
-                    //            }
-                    //        });
-                    //    });
-                        //return {
-                        //    "Result": "OK",
-                        //    "Records": [
-                        //        { "PK_Building_ID": 1, "Name_Short": "T-Buildins", "Name_Long": "The temp building" },
-
-                        //    ],
-                        //    "TotalRecordCount": 1
-                        //};
-                    //},
-                    createAction: '/BuildingInsert',
-                    updateAction: '/BuildingUpdate',
-                    deleteAction: '/BuildingDelete',
+                    createAction: buildingcreate,
+                    updateAction: buildingupdate,
+                    deleteAction: buildingdelete,
+                },
+                messages: {
+                    deleteConfirmation: 'Edit/Update the Deleted Flag\r\nPressing DELETE is permanent!',
+                },
+                toolbar: {
+                    items: [
+                        {
+                            icon: '/images/excel.png',
+                            text: 'Export to Excel',
+                            click: function () {
+                                //perform your custom job...
+                            }
+                        }, {
+                            icon: '/images/pdf.png',
+                            text: 'Export to Pdf',
+                            click: function () {
+                                //perform your custom job...
+                            }
+                        }, {
+                            icon: '/Content/images/refreshred32.png',
+                            text: 'REFRESH',
+                            click: function () {
+                                //perform your custom job...
+                            }
+                        }
+                    ]
                 },
                 fields: {
                     PK_Building_Id: {
@@ -50,11 +53,45 @@
                     },
                     Name_Short: {
                         title: 'Building Short Name',
-                        width: '20%'
+                        width: '10%'
                     },
                     Name_Long: {
                         title: 'Building Long Name',
-                        width: '30%'
+                        width: '20%'
+                    },
+                    Description: {
+                        title: 'Description of the building',
+                        width: '20%'
+                    },
+                    AddressStreet: {
+                        title: 'Street Address',
+                        width: "20%'"
+                    },
+                    AddressUnit: {
+                        title: 'Apartment/Suite',
+                        width: '10%'
+                    },
+                    AddressCity: {
+                        title: 'City',
+                        width: '10%'
+                    },
+                    AddressState: {
+                        title: 'STATE',
+                        width: '5%'
+                    },
+                    AddressZip: {
+                        title: 'Zip code'
+
+                    },
+                    IsActive: {
+                        title: 'Active',
+                        type: 'checkbox',
+                        values: { 'false': 'Inactive', 'true': 'Active' }
+                    },
+                    IsDeleted: {
+                        title: 'Deleted',
+                        type: 'checkbox',
+                        values: { 'false': 'NO', 'true': 'DELETED' }
                     }
                 }
             });
@@ -62,30 +99,102 @@
             return true;
         };
 
-        //  Used by jTable listAction method
-        var buildingselect = function (postData, jtParams) {
+        //  Used by jTable deleteAction method
+        var buildingdelete = function (postData, jtParams) {
+            var r = confirm('Do you wish to delete ALL rooms and associated invoices ?');
+            if (r == true) {
+                return $.Deferred(function ($dfd) {
+                    $.ajax({
+                        url: webServiceURL() + '/jTable/BuildingDelete',
+                        type: 'POST',
+                        dataType: 'json',
+                        data: postData,
+                        success: function (data) {
+                            $dfd.resolve(data);
+                        },
+                        error: function (request, error, exception) {
+                            $dfd.reject();
+                        }
+                    });
+                });
+            } else {
+                //return $.Deferred(function ($dfd) {
+                //    try {
+                //        //$dfd.reject();
+                //        $dfd.resolve();
+                //    } catch {
+                //    }
+                //});
+                return $.Deferred(function ($dfd) {
+                    $.ajax({
+                        url: webServiceURL() + '/jTable/Nop',
+                        type: 'POST',
+                        dataType: 'json',
+                        data: postData,
+                        success: function (data) {
+                            $dfd.resolve(data);
+                        },
+                        error: function (request, error, exception) {
+                            $dfd.reject();
+                        }
+                    });
+                });
+            };
+            
+        }
+
+        //  Used by jTable createAction method
+        var buildingcreate = function (postData, jtParams) {
             return $.Deferred(function ($dfd) {
                 $.ajax({
-                    url: 'https://localhost:5043/jTable/BuildingSelect',
+                    url: webServiceURL() + '/jTable/BuildingCreate',
                     type: 'POST',
                     dataType: 'json',
                     data: postData,
                     success: function (data) {
                         $dfd.resolve(data);
                     },
-                    error: function () {
+                    error: function (request, error, exception) {
                         $dfd.reject();
                     }
                 });
             });
-            //return {
-            //    "Result": "OK",
-            //    "Records": [
-            //        { "PK_Building_ID": 1, "Name_Short": "T-Buildins", "Name_Long": "The temp building" },
+        }
 
-            //    ],
-            //    "TotalRecordCount": 1
-            //};
+        //  Used by jTable updateAction method
+        var buildingupdate = function (postData, jtParams) {
+            return $.Deferred(function ($dfd) {
+                $.ajax({
+                    url: webServiceURL() + '/jTable/BuildingUpdate',
+                    type: 'POST',
+                    dataType: 'json',
+                    data: postData,
+                    success: function (data) {
+                        $dfd.resolve(data);
+                    },
+                    error: function (request, error, exception) {
+                        $dfd.reject();
+                    }
+                });
+            });
+        }
+
+        //  Used by jTable listAction method
+        var buildingselect = function (postData, jtParams) {
+            return $.Deferred(function ($dfd) {
+                $.ajax({
+                    url: webServiceURL() + '/jTable/BuildingSelect',     //  ?' + postData,
+                    type: 'POST',
+                    dataType: 'json',
+                    data: postData,
+                    success: function (data) {
+                        $dfd.resolve(data);
+                    },
+                    error: function (request, error, exception) {
+                        $dfd.reject();
+                    }
+                });
+            });
         }
 
         var jtableCallback = function (evt) {
@@ -110,5 +219,6 @@
         isLoading: isLoading,
         activate: activate,
         compositionComplete: compositionComplete,
+        webServiceURL: webServiceURL,
     };
 });

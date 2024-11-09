@@ -10,6 +10,12 @@ using BCLservice.ServiceData;
 
 namespace BCLservice.ServiceModel
 {
+    [Route("/jTable/Nop")]
+    public class jTableNOP_Request : BuildingObjectRow, IReturn<jBuildingResponse>
+    {
+
+    }
+
     [Route("/BuildingSelect")]
     public class BuildingSelect_Request : IReturn<BuildingResponse>
     {
@@ -54,15 +60,53 @@ namespace BCLservice.ServiceModel
     {
     }
 
-    public class jBuildingResponse 
+    [Route("/jTable/BuildingUpdate")]
+    public class jBuildingUpdate_Request : BuildingObjectRow, IReturn<jBuildingResponse>
+    {
+
+    }
+
+    [Route("/jTable/BuildingDelete")]
+    public class jBuildingDelete_Request : BuildingObjectRow, IReturn<jBuildingResponse>
+    {
+
+    }
+
+    [Route("/jTable/BuildingCreate")]
+    public class jBuildingCreate_Request : BuildingObjectRow, IReturn<jBuildingRecordResponse>
+    {
+
+    }
+
+    public class jBuildingRecordResponse
+    {
+        public string Result { get; set; }
+        public BuildingObjectRow Record { get; set; }
+        public int TotalRecordCount { get; set; }
+        public string Message { get; set; }
+
+        public void New()
+        {
+            this.Record = new BuildingObjectRow();
+            this.Result = string.Empty;
+            this.Message = string.Empty;
+            this.TotalRecordCount = 0;
+        }
+    }
+
+    public class jBuildingResponse
     {
         public string Result { get; set; }
         public List<BuildingObject> Records { get; set; }
-        
+        public int TotalRecordCount { get; set; }
+        public string Message { get; set; }
+
         public void New()
         {
             this.Records = new List<BuildingObject>();
             this.Result = string.Empty;
+            this.Message = string.Empty;
+            this.TotalRecordCount = 0;
         }
     }
 

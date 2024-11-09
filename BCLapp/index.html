@@ -73,7 +73,7 @@
     <div id="applicationHost">
         <p style="font-family: 'Global User Interface'; font-size: large">Loading....</p>
         <script>document.write(window.urlArgs + ' - on - ');
-            
+            sessionStorage.setItem('WebService', webservice);
             sessionStorage.setItem('IdleTimeoutMinutes', idletimeoutminutes);
             function initMap() { };</script>
         <span class="pull-right"><i class="fa fa-fw fa-3x fa-spinner fa-spin"></i></span>
