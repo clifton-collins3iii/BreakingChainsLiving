@@ -26,22 +26,22 @@
                 toolbar: {
                     items: [
                         {
-                            icon: '/images/excel.png',
+                            icon: '/Content/images/exceliconbw16.png',
                             text: 'Export to Excel',
                             click: function () {
                                 //perform your custom job...
                             }
                         }, {
-                            icon: '/images/pdf.png',
+                            icon: '/Content/images/pdficon16.png',
                             text: 'Export to Pdf',
                             click: function () {
                                 //perform your custom job...
                             }
                         }, {
-                            icon: '/Content/images/refreshred32.png',
+                            icon: '/Content/images/refreshred16.png',
                             text: 'REFRESH',
                             click: function () {
-                                //perform your custom job...
+                                $('#BuildingTableContainer').jtable('reload');
                             }
                         }
                     ]

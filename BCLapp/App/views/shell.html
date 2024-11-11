@@ -1,18 +1,29 @@
-﻿<div>
-    <div class="navbar navbar-default" role="navigation">
-        <div class="navbar-header">
-            <a class="navbar-brand" data-bind="attr: { href: router.navigationModel()[0].hash }">
-                <i class="fa fa-home"></i>-
-            </a>
-        </div>
-        <div class="">
-            <ul class="list-group list-group-horizontal" data-bind="foreach: router.navigationModel">
-                <li class="list-group-item" data-bind="css: { active: isActive }">
-                    <a data-bind="attr: { href: hash }, html: title"></a>
+﻿<div style="width: 100%; position: center;">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <a class="navbar-brand" data-bind="attr: { href: router.navigationModel()[0].hash }">
+            <i class="fa fa-home"></i>-
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav" data-bind="foreach: router.navigationModel">
+                <li class="nav-item active" data-bind="css: { active: isActive }">
+                    <a class="nav-link "   data-bind="attr: { href: hash }, html: title"><span class="sr-only">(current)</span></a>
                 </li>
+                
+                <!--<li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Dropdown link
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                </li>-->
             </ul>
         </div>
-    </div>
-
+    </nav>
     <div class="page-host" data-bind="router: { transition: 'entrance', cacheViews: false }"></div>
 </div>
