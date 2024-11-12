@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ServiceStack;
-using BCLservice.ServiceModel;
 using BCLservice.ServiceData;
 
 namespace BCLservice.ServiceInterface

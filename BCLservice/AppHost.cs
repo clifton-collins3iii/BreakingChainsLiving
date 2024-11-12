@@ -1,5 +1,6 @@
 using Funq;
 using ServiceStack;
+using ServiceStack.ServiceInterface;
 using BCLservice.ServiceInterface;
 
 namespace BCLservice
@@ -11,7 +12,7 @@ namespace BCLservice
         /// Base constructor requires a Name and Assembly where web service implementation is located
         /// </summary>
         public AppHost()
-            : base("BCLservice", typeof(Hello_Service).Assembly) { }
+            : base("BCLservice", typeof(Building_Service).Assembly) { }
 
         /// <summary>
         /// Application specific configuration
@@ -20,7 +21,7 @@ namespace BCLservice
         public override void Configure(Container container)
         {
             //Config examples
-            this.Plugins.Add(new PostmanFeature());
+            //this.Plugins.Add(new PostmanFeature());
             this.Plugins.Add(new CorsFeature());
         }
     }

@@ -3,7 +3,7 @@ using BCLservice.ServiceModel;
 
 namespace BCLservice.ServiceInterface
 {
-    public class Hello_Service : Service
+    public class Hello_Service
     {
         public object Any(Hello_Request request)
         {

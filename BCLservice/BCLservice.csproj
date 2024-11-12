@@ -46,6 +46,38 @@
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="mscorlib" />
+    <Reference Include="ServiceStack, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\ServiceStack.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\ServiceStack.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Interfaces, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\ServiceStack.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.OrmLite, Version=3.9.71.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\ServiceStack.OrmLite.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.OrmLite.SqlServer, Version=3.9.71.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\ServiceStack.OrmLite.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Redis, Version=3.9.71.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\ServiceStack.Redis.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.ServiceInterface, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\ServiceStack.ServiceInterface.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Text, Version=3.9.63.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\ServiceStack.Text.dll</HintPath>
+    </Reference>
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System" />
     <Reference Include="System.Net" />
@@ -82,6 +114,14 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
+    <Content Include="lib\ServiceStack.Common.dll" />
+    <Content Include="lib\ServiceStack.dll" />
+    <Content Include="lib\ServiceStack.Interfaces.dll" />
+    <Content Include="lib\ServiceStack.OrmLite.dll" />
+    <Content Include="lib\ServiceStack.OrmLite.SqlServer.dll" />
+    <Content Include="lib\ServiceStack.Redis.dll" />
+    <Content Include="lib\ServiceStack.ServiceInterface.dll" />
+    <Content Include="lib\ServiceStack.Text.dll" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -101,13 +141,17 @@
       <Version>5.3.3</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
-    <PackageReference Include="ServiceStack" Version="8.*" />
-    <PackageReference Include="ServiceStack.Interfaces">
-      <Version>8.4.0</Version>
+    <PackageReference Include="ServiceStack">
+      <Version>6.11.0</Version>
     </PackageReference>
-    <PackageReference Include="ServiceStack.Server" Version="8.*" />
+    <PackageReference Include="ServiceStack.Api.Postman">
+      <Version>1.0.11</Version>
+    </PackageReference>
+    <PackageReference Include="ServiceStack.Common">
+      <Version>6.11.0</Version>
+    </PackageReference>
     <PackageReference Include="ServiceStack.Text">
-      <Version>8.4.0</Version>
+      <Version>6.11.0</Version>
     </PackageReference>
   </ItemGroup>
   <PropertyGroup>

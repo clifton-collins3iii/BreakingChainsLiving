@@ -52,8 +52,10 @@
                         list: false
                     },
                     FK_Building_Id: {
-                        key: false,
-                        list: false
+                        title: 'Building',
+                        width: '10%',
+                        //options: Buildingoptions
+                        options: [{ Value: '1', DisplayText: 'Admin Office' }, { Value: '5', DisplayText: 'Dartmoor' }, { Value: '6', DisplayText: 'Next2' },]
                     },
                     Name_Short: {
                         title: 'Room Short Name',
@@ -90,6 +92,30 @@
             $('#RoomTableContainer').jtable('load');
             return true;
         };
+
+        var Buildingoptions = function (data) {
+            var params = data;
+            if (data.source == 'list') {
+                //  returns matching building shortname from FK
+                
+            }
+            //  Runs only when user opens the edit/create dialog to create dropdown/option combobox
+            //data.source == 'edit' || data.source == 'create'
+            return $.Deferred(function ($dfd) {
+                $.ajax({
+                    url: webServiceURL() + '/jTableOptions/Buildingoptions',     //  ?' + postData,
+                    type: 'POST',
+                    dataType: 'json',
+                    data: params,
+                    success: function (data) {      // {"Result":"OK", "Options":[{"DisplayText": "", "Value":"FK_Building_ID"}, {}, {}]}
+                        $dfd.resolve(data);
+                    },
+                    error: function (request, error, exception) {
+                        $dfd.reject();
+                    }
+                });
+            });
+        }
 
         //  Used by jTable deleteAction method
         var Roomdelete = function (postData, jtParams) {
