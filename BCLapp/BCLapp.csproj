@@ -322,6 +322,8 @@
     <Content Include="Scripts\knockout-3.5.1.js" />
     <Content Include="Scripts\r.js" />
     <Content Include="Scripts\require.js" />
+    <Content Include="SolutionItems\servicestack-license_opensource.txt" />
+    <Content Include="SolutionItems\servicestack-license_private.txt" />
     <Content Include="weyland-config.js" />
     <Content Include="Scripts\almond-custom.js" />
     <Content Include="Scripts\durandal\activator.js" />
