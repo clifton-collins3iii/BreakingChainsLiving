@@ -9,17 +9,17 @@ using BCLservice.ServiceData.BCLservice.ServiceData;
 
 namespace BCLservice.ServiceInterface
 {
-    public class Building_Service : Service
+    public class BuildingRoom_Service : Service
     {
-        public object Any(ServiceModel.jTableNOPBuilding_Request request)
+        public object Any(ServiceModel.jTableNOPBuildingRoom_Request request)
         {
-            ServiceModel.jBuildingResponse result = new ServiceModel.jBuildingResponse();
+            ServiceModel.jBuildingRoomResponse result = new ServiceModel.jBuildingRoomResponse();
             result.Result = "ERROR";
             try
             {
-                BuildingObject brow = new BuildingObject();
-                brow.PK_Building_Id = 0;
-                List<BuildingObject> bobj = new List<BuildingObject>();
+                BuildingRoomObject brow = new BuildingRoomObject();
+                brow.PK_BuildingRoom_Id = 0;
+                List<BuildingRoomObject> bobj = new List<BuildingRoomObject>();
                 bobj.Add(brow);
                 result.Records = bobj;
                 result.TotalRecordCount = 0;
@@ -34,24 +34,24 @@ namespace BCLservice.ServiceInterface
             return result;
         }
 
-        public object Any(ServiceModel.BuildingSelect_Request request)
+        public object Any(ServiceModel.BuildingRoomSelect_Request request)
         {
-            ServiceModel.BuildingResponse result = new ServiceModel.BuildingResponse();
+            ServiceModel.BuildingRoomResponse result = new ServiceModel.BuildingRoomResponse();
             ResponseStatus status = new ResponseStatus
             {
                 ErrorCode = "Success",
                 Message = request.ToString()
             };
-            result.Building = dtBuilding.returnBuildingObject();
+            result.BuildingRoom = dtBuildingRoom.returnBuildingRoomObject();
             return result;
         }
-        public object Any(ServiceModel.jBuildingSelect_Request request)
+        public object Any(ServiceModel.jBuildingRoomSelect_Request request)
         {
-            ServiceModel.jBuildingResponse result = new ServiceModel.jBuildingResponse();
+            ServiceModel.jBuildingRoomResponse result = new ServiceModel.jBuildingRoomResponse();
             result.Result = "ERROR";
             try
             {
-                result.Records = dtBuilding.returnBuildingObject();
+                result.Records = dtBuildingRoom.returnBuildingRoomObject();
                 result.TotalRecordCount = result.Records.Count;
                 result.Result = "OK";
                 result.Message = "";
@@ -64,13 +64,13 @@ namespace BCLservice.ServiceInterface
             return result;
         }
 
-        public object Any(ServiceModel.jBuildingUpdate_Request request)
+        public object Any(ServiceModel.jBuildingRoomUpdate_Request request)
         {
-            ServiceModel.jBuildingResponse result = new ServiceModel.jBuildingResponse();
+            ServiceModel.jBuildingRoomResponse result = new ServiceModel.jBuildingRoomResponse();
             result.Result = "ERROR";
             try
             {
-                result.Records = dtBuilding.updateBuildingObject(request);
+                result.Records = dtBuildingRoom.updateBuildingRoomObject(request);
                 result.TotalRecordCount = result.Records.Count;
                 result.Result = "OK";
                 result.Message = "";
@@ -83,13 +83,13 @@ namespace BCLservice.ServiceInterface
             return result;
         }
 
-        public object Any(ServiceModel.jBuildingCreate_Request request)
+        public object Any(ServiceModel.jBuildingRoomCreate_Request request)
         {
-            ServiceModel.jBuildingRecordResponse result = new ServiceModel.jBuildingRecordResponse();
+            ServiceModel.jBuildingRoomRecordResponse result = new ServiceModel.jBuildingRoomRecordResponse();
             result.Result = "ERROR";
             try
             {
-                result.Record = dtBuilding.createBuildingObject(request);
+                result.Record = dtBuildingRoom.createBuildingRoomObject(request);
                 result.TotalRecordCount = 1;
                 result.Result = "OK";
                 result.Message = "";
@@ -102,13 +102,13 @@ namespace BCLservice.ServiceInterface
             return result;
         }
 
-        public object Any(ServiceModel.jBuildingDelete_Request request)
+        public object Any(ServiceModel.jBuildingRoomDelete_Request request)
         {
-            ServiceModel.jBuildingResponse result = new ServiceModel.jBuildingResponse();
+            ServiceModel.jBuildingRoomResponse result = new ServiceModel.jBuildingRoomResponse();
             result.Result = "ERROR";
             try
             {
-                dtBuilding.deleteBuildingObject(request);
+                dtBuildingRoom.deleteBuildingRoomObject(request);
                 //result.TotalRecordCount = result.Records.Count;
                 result.Result = "OK";
                 result.Message = "";

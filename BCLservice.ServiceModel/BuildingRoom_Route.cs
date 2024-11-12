@@ -10,18 +10,18 @@ using BCLservice.ServiceData;
 
 namespace BCLservice.ServiceModel
 {
-    [Route("/jTable/NopBuilding")]
-    public class jTableNOPBuilding_Request : BuildingObjectRow, IReturn<jBuildingResponse>
+    [Route("/jTable/NopBuildingRoom")]
+    public class jTableNOPBuildingRoom_Request : BuildingRoomObjectRow, IReturn<jBuildingRoomResponse>
     {
 
     }
 
-    [Route("/BuildingSelect")]
-    public class BuildingSelect_Request : IReturn<BuildingResponse>
+    [Route("/RoomSelect")]
+    public class BuildingRoomSelect_Request : IReturn<jBuildingRoomResponse>
     {
     }
 
-    public class BuildingResponse : IHasResponseStatus
+    public class BuildingRoomResponse : IHasResponseStatus
     {
         private ResponseStatus _responseStatus;
         public ResponseStatus ResponseStatus
@@ -35,75 +35,75 @@ namespace BCLservice.ServiceModel
                 _responseStatus = value;
             }
         }
-        private List<BuildingObject> _Building;
-        public List<BuildingObject> Building
+        private List<BuildingRoomObject> _Room;
+        public List<BuildingRoomObject> BuildingRoom
         {
             get
             {
-                return _Building;
+                return _Room;
             }
             set
             {
-                _Building = value;
+                _Room = value;
             }
         }
-        public BuildingResponse()
+        public BuildingRoomResponse()
         {
-            this.Building = new List<BuildingObject>();
+            this.BuildingRoom = new List<BuildingRoomObject>();
             this.ResponseStatus = new ResponseStatus();
             this.ResponseStatus.Errors = new List<ResponseError>();
         }
     }
 
-    [Route("/jTable/BuildingSelect")]
-    public class jBuildingSelect_Request : IReturn<jBuildingResponse>
+    [Route("/jTable/RoomSelect")]
+    public class jBuildingRoomSelect_Request : IReturn<jBuildingRoomResponse>
     {
     }
 
-    [Route("/jTable/BuildingUpdate")]
-    public class jBuildingUpdate_Request : BuildingObjectRow, IReturn<jBuildingResponse>
-    {
-
-    }
-
-    [Route("/jTable/BuildingDelete")]
-    public class jBuildingDelete_Request : BuildingObjectRow, IReturn<jBuildingResponse>
+    [Route("/jTable/RoomUpdate")]
+    public class jBuildingRoomUpdate_Request : BuildingRoomObjectRow, IReturn<jBuildingRoomResponse>
     {
 
     }
 
-    [Route("/jTable/BuildingCreate")]
-    public class jBuildingCreate_Request : BuildingObjectRow, IReturn<jBuildingRecordResponse>
+    [Route("/jTable/RoomDelete")]
+    public class jBuildingRoomDelete_Request : BuildingRoomObjectRow, IReturn<jBuildingRoomResponse>
     {
 
     }
 
-    public class jBuildingRecordResponse
+    [Route("/jTable/RoomCreate")]
+    public class jBuildingRoomCreate_Request : BuildingRoomObjectRow, IReturn<jBuildingRoomRecordResponse>
+    {
+
+    }
+
+    public class jBuildingRoomRecordResponse
     {
         public string Result { get; set; }
-        public BuildingObjectRow Record { get; set; }
+        public BuildingRoomObjectRow Record { get; set; }
         public int TotalRecordCount { get; set; }
         public string Message { get; set; }
 
         public void New()
         {
-            this.Record = new BuildingObjectRow();
+            this.Record = new BuildingRoomObjectRow();
             this.Result = string.Empty;
             this.Message = string.Empty;
             this.TotalRecordCount = 0;
         }
     }
 
-    public class jBuildingResponse
+    public class jBuildingRoomResponse
     {
         public string Result { get; set; }
-        public List<BuildingObject> Records { get; set; }
+        public List<BuildingRoomObject> Records { get; set; }
         public int TotalRecordCount { get; set; }
         public string Message { get; set; }
 
         public void New()
         {
-            this.Records = new List<BuildingObject>();
+            this.Records = new List<BuildingRoomObject>();
             this.Result = string.Empty;
             this.Message = string.Empty;
             this.TotalRecordCount = 0;

@@ -12,13 +12,13 @@
         }
 
         var compositionComplete = function () {
-            $('#BuildingTableContainer').jtable({
-                title: 'Building Edit',
+            $('#RoomTableContainer').jtable({
+                title: 'Room Edit',
                 actions: {
-                    listAction: buildingselect,     // this calls the javascript function buildingselect() below
-                    createAction: buildingcreate,
-                    updateAction: buildingupdate,
-                    deleteAction: buildingdelete,
+                    listAction: Roomselect,     // this calls the javascript function Roomselect() below
+                    createAction: Roomcreate,
+                    updateAction: Roomupdate,
+                    deleteAction: Roomdelete,
                 },
                 messages: {
                     deleteConfirmation: 'Edit/Update the Deleted Flag\r\nPressing DELETE is permanent!',
@@ -41,47 +41,39 @@
                             icon: '/Content/images/refreshred16.png',
                             text: 'REFRESH',
                             click: function () {
-                                $('#BuildingTableContainer').jtable('reload');
+                                $('#RoomTableContainer').jtable('reload');
                             }
                         }
                     ]
                 },
                 fields: {
-                    PK_Building_Id: {
+                    PK_BuildingRoom_Id: {
                         key: true,
                         list: false
                     },
+                    FK_Building_Id: {
+                        key: false,
+                        list: false
+                    },
                     Name_Short: {
-                        title: 'Building Short Name',
+                        title: 'Room Short Name',
                         width: '10%'
                     },
                     Name_Long: {
-                        title: 'Building Long Name',
+                        title: 'Room Long Name',
                         width: '20%'
                     },
                     Description: {
-                        title: 'Description of the building',
+                        title: 'Description of the Room',
                         width: '20%'
                     },
-                    AddressStreet: {
-                        title: 'Street Address',
-                        width: "20%'"
+                    RentPaymentFrequency: {
+                        title: 'Payment Period',
+                        width: "10%'"
                     },
-                    AddressUnit: {
-                        title: 'Apartment/Suite',
+                    RentPaymentAmount: {
+                        title: 'Payment Amount',
                         width: '10%'
-                    },
-                    AddressCity: {
-                        title: 'City',
-                        width: '10%'
-                    },
-                    AddressState: {
-                        title: 'STATE',
-                        width: '5%'
-                    },
-                    AddressZip: {
-                        title: 'Zip code'
-
                     },
                     IsActive: {
                         title: 'Active',
@@ -95,17 +87,17 @@
                     }
                 }
             });
-            $('#BuildingTableContainer').jtable('load');
+            $('#RoomTableContainer').jtable('load');
             return true;
         };
 
         //  Used by jTable deleteAction method
-        var buildingdelete = function (postData, jtParams) {
+        var Roomdelete = function (postData, jtParams) {
             var r = confirm('Do you wish to delete ALL rooms and associated invoices ?');
             if (r == true) {
                 return $.Deferred(function ($dfd) {
                     $.ajax({
-                        url: webServiceURL() + '/jTable/BuildingDelete',
+                        url: webServiceURL() + '/jTable/RoomDelete',
                         type: 'POST',
                         dataType: 'json',
                         data: postData,
@@ -127,7 +119,7 @@
                 //});
                 return $.Deferred(function ($dfd) {
                     $.ajax({
-                        url: webServiceURL() + '/jTable/NopBuilding',
+                        url: webServiceURL() + '/jTable/NopBuildingRoom',
                         type: 'POST',
                         dataType: 'json',
                         data: postData,
@@ -144,10 +136,10 @@
         }
 
         //  Used by jTable createAction method
-        var buildingcreate = function (postData, jtParams) {
+        var Roomcreate = function (postData, jtParams) {
             return $.Deferred(function ($dfd) {
                 $.ajax({
-                    url: webServiceURL() + '/jTable/BuildingCreate',
+                    url: webServiceURL() + '/jTable/RoomCreate',
                     type: 'POST',
                     dataType: 'json',
                     data: postData,
@@ -162,10 +154,10 @@
         }
 
         //  Used by jTable updateAction method
-        var buildingupdate = function (postData, jtParams) {
+        var Roomupdate = function (postData, jtParams) {
             return $.Deferred(function ($dfd) {
                 $.ajax({
-                    url: webServiceURL() + '/jTable/BuildingUpdate',
+                    url: webServiceURL() + '/jTable/RoomUpdate',
                     type: 'POST',
                     dataType: 'json',
                     data: postData,
@@ -180,10 +172,10 @@
         }
 
         //  Used by jTable listAction method
-        var buildingselect = function (postData, jtParams) {
+        var Roomselect = function (postData, jtParams) {
             return $.Deferred(function ($dfd) {
                 $.ajax({
-                    url: webServiceURL() + '/jTable/BuildingSelect',     //  ?' + postData,
+                    url: webServiceURL() + '/jTable/RoomSelect',     //  ?' + postData,
                     type: 'POST',
                     dataType: 'json',
                     data: postData,
@@ -214,7 +206,7 @@
 
 
     return {
-        displayName: 'Building',
+        displayName: 'Room',
         images: ko.observableArray([]),
         isLoading: isLoading,
         activate: activate,

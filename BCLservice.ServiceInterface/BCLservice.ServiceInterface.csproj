@@ -51,6 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppVersions_Service.cs" />
+    <Compile Include="BuildingRoom_Service.cs" />
     <Compile Include="Building_Service.cs" />
     <Compile Include="Hello_Service.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
