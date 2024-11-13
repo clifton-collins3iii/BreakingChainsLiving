@@ -6,9 +6,27 @@
         //See the "welcome" module for an example of function export.
         var isLoading = ko.observable(false);
         var webServiceURL = ko.observable(sessionStorage.getItem('WebService'));
+        var buildingOptionsArray;
+        var buildingOptionsJSON = function (data) {
+            return buildingOptionsArray;
+            //return [{ Value: '1', DisplayText: 'Admin Office' }, { Value: '5', DisplayText: 'Dartmoor' }, { Value: '6', DisplayText: 'Next2' }];
+        }
 
         var activate = function () {
             //the router's activator calls this function and waits for it to complete before proceding
+            
+                $.ajax({
+                    url: webServiceURL() + '/jTableOptions/BuildingOptionsSelect',     //  ?' + postData,
+                    type: 'POST',
+                    dataType: 'json',
+                    success: function (data) {      // {"Result":"OK", "Options":[{"DisplayText": "", "Value":"FK_Building_ID"}, {}, {}]}
+                        //buildingOptionsArray = JSON.stringify(data.Options);
+                        buildingOptionsArray = data.Options;
+                    },
+                    error: function (request, error, exception) {
+                        
+                    }
+                });
         }
 
         var compositionComplete = function () {
@@ -55,7 +73,7 @@
                         title: 'Building',
                         width: '10%',
                         //options: Buildingoptions
-                        options: [{ Value: '1', DisplayText: 'Admin Office' }, { Value: '5', DisplayText: 'Dartmoor' }, { Value: '6', DisplayText: 'Next2' },]
+                        options: buildingOptionsJSON
                     },
                     Name_Short: {
                         title: 'Room Short Name',
@@ -103,12 +121,12 @@
             //data.source == 'edit' || data.source == 'create'
             return $.Deferred(function ($dfd) {
                 $.ajax({
-                    url: webServiceURL() + '/jTableOptions/Buildingoptions',     //  ?' + postData,
+                    url: webServiceURL() + '/jTableOptions/BuildingOptionsSelect',     //  ?' + postData,
                     type: 'POST',
                     dataType: 'json',
                     data: params,
                     success: function (data) {      // {"Result":"OK", "Options":[{"DisplayText": "", "Value":"FK_Building_ID"}, {}, {}]}
-                        $dfd.resolve(data);
+                        $dfd.resolve(JSON.stringify(data.Records));
                     },
                     error: function (request, error, exception) {
                         $dfd.reject();

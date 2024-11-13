@@ -156,9 +156,11 @@
     <Compile Include="dtAppVersions.cs" />
     <Compile Include="dtBuildingRoom.cs" />
     <Compile Include="dtBuilding.cs" />
+    <Compile Include="dtTableOptions.cs" />
     <Compile Include="Objects\AppVersionObject.cs" />
     <Compile Include="Objects\BuildingRoomObject.cs" />
     <Compile Include="Objects\BuildingObject.cs" />
+    <Compile Include="Objects\jTableOptionsObject.cs" />
     <Compile Include="Objects\ResultObject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">

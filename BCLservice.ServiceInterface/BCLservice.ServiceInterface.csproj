@@ -85,6 +85,7 @@
     <Compile Include="BuildingRoom_Service.cs" />
     <Compile Include="Building_Service.cs" />
     <Compile Include="Hello_Service.cs" />
+    <Compile Include="jTableOptions_Services.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

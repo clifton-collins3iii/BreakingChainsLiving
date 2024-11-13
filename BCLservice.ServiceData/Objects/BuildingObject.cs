@@ -47,4 +47,10 @@ namespace BCLservice.ServiceData
         public string AddressState { get; set; }
         public string AddressZip { get; set; }
     }
+
+    public class BuildingOptionsObject
+    {
+        public int Value { get; set; }
+        public string DisplayText { get; set; }
+    }
 }
