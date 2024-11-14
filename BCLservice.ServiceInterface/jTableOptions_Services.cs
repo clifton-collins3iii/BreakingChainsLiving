@@ -3,7 +3,6 @@ using ServiceStack;
 using System;
 using System.Collections.Generic;
 using BCLservice.ServiceData.BCLservice.ServiceData;
-using BCLservice.ServiceData.Objects;
 
 namespace BCLservice.ServiceInterface
 {
@@ -12,11 +11,47 @@ namespace BCLservice.ServiceInterface
 
         public object Any(ServiceModel.jBuildingOptions_Request request)
         {
-            ServiceModel.jBuildingOptionsResponse result = new ServiceModel.jBuildingOptionsResponse();
+            ServiceModel.jTableOptionsResponse result = new ServiceModel.jTableOptionsResponse();
             result.Result = "ERROR";
             try
             {
                 result.Options = dtTableOptions_Services.returnBuildingOptionsObject();
+                result.Result = "OK";
+                result.Message = "";
+            }
+            catch (Exception ex)
+            {
+                result.Result = "ERROR";
+                result.Message = ex.Message;
+            }
+            return result;
+        }
+
+        public object Any(ServiceModel.jStatesOptions_Request request)
+        {
+            ServiceModel.jTableStrOptionsResponse result = new ServiceModel.jTableStrOptionsResponse();
+            result.Result = "ERROR";
+            try
+            {
+                result.Options = dtTableOptions_Services.returnStatesOptionsObject();
+                result.Result = "OK";
+                result.Message = "";
+            }
+            catch (Exception ex)
+            {
+                result.Result = "ERROR";
+                result.Message = ex.Message;
+            }
+            return result;
+        }
+
+        public object Any(ServiceModel.jRentPaymentFrequencyOptions_Request request)
+        {
+            ServiceModel.jTableStrOptionsResponse result = new ServiceModel.jTableStrOptionsResponse();
+            result.Result = "ERROR";
+            try
+            {
+                result.Options = dtTableOptions_Services.returnRentPaymentFrequencyOptionsObject();
                 result.Result = "OK";
                 result.Message = "";
             }

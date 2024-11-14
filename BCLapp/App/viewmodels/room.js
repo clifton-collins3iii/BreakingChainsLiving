@@ -7,8 +7,15 @@
         var isLoading = ko.observable(false);
         var webServiceURL = ko.observable(sessionStorage.getItem('WebService'));
         var buildingOptionsArray;
+        var rentpaymentOptionsArray;
+
         var buildingOptionsJSON = function (data) {
             return buildingOptionsArray;
+            //return [{ Value: '1', DisplayText: 'Admin Office' }, { Value: '5', DisplayText: 'Dartmoor' }, { Value: '6', DisplayText: 'Next2' }];
+        }
+
+        var rentpaymentfrequencyOptionsJSON = function (data) {
+            return rentpaymentOptionsArray;
             //return [{ Value: '1', DisplayText: 'Admin Office' }, { Value: '5', DisplayText: 'Dartmoor' }, { Value: '6', DisplayText: 'Next2' }];
         }
 
@@ -27,6 +34,19 @@
                         
                     }
                 });
+
+            $.ajax({
+                url: webServiceURL() + '/jTableOptions/RentPaymentFrequencyOptionsSelect',     //  ?' + postData,
+                type: 'POST',
+                dataType: 'json',
+                success: function (data) {      // {"Result":"OK", "Options":[{"DisplayText": "", "Value":"FK_Building_ID"}, {}, {}]}
+                    //buildingOptionsArray = JSON.stringify(data.Options);
+                    rentpaymentOptionsArray = data.Options;
+                },
+                error: function (request, error, exception) {
+
+                }
+            });
         }
 
         var compositionComplete = function () {
@@ -89,7 +109,8 @@
                     },
                     RentPaymentFrequency: {
                         title: 'Payment Period',
-                        width: "10%'"
+                        width: "10%'",
+                        options: rentpaymentfrequencyOptionsJSON
                     },
                     RentPaymentAmount: {
                         title: 'Payment Amount',
@@ -98,7 +119,8 @@
                     IsActive: {
                         title: 'Active',
                         type: 'checkbox',
-                        values: { 'false': 'Inactive', 'true': 'Active' }
+                        values: { 'false': 'Inactive', 'true': 'Active' },
+                        defaultValue: true
                     },
                     IsDeleted: {
                         title: 'Deleted',

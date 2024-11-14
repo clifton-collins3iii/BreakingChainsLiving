@@ -30,13 +30,13 @@
         }
 
         var compositionComplete = function () {
-            $('#BuildingTableContainer').jtable({
-                title: 'Building Edit',
+            $('#ResidentTableContainer').jtable({
+                title: 'Resident Edit',
                 actions: {
-                    listAction: buildingselect,     // this calls the javascript function buildingselect() below
-                    createAction: buildingcreate,
-                    updateAction: buildingupdate,
-                    deleteAction: buildingdelete,
+                    listAction: residentselect,     // this calls the javascript function buildingselect() below
+                    createAction: residentcreate,
+                    updateAction: residentupdate,
+                    deleteAction: residentdelete,
                 },
                 messages: {
                     deleteConfirmation: 'Edit/Update the Deleted Flag\r\nPressing DELETE is permanent!',
@@ -65,21 +65,33 @@
                     ]
                 },
                 fields: {
-                    PK_Building_Id: {
+                    PK_Resident_Id: {
                         key: true,
                         list: false
                     },
-                    Name_Short: {
-                        title: 'Building Short Name',
+                    Name_First: {
+                        title: 'Resident First Name',
                         width: '10%'
                     },
-                    Name_Long: {
-                        title: 'Building Long Name',
-                        width: '20%'
+                    Name_Middle: {
+                        title: 'Resident Middle Name',
+                        width: '10%'
+                    },
+                    Name_Second: {
+                        title: 'Resident Last Name',
+                        width: '10%'
                     },
                     Description: {
-                        title: 'Description of the building',
+                        title: 'Description',
                         width: '20%'
+                    },
+                    PhoneNumber: {
+                        title: 'Phone Number',
+                        width: '5%'
+                    },
+                    EmailAddress: {
+                        title: 'Email Address',
+                        width: '10%'
                     },
                     AddressStreet: {
                         title: 'Street Address',
@@ -114,17 +126,17 @@
                     }
                 }
             });
-            $('#BuildingTableContainer').jtable('load');
+            $('#ResidentTableContainer').jtable('load');
             return true;
         };
 
         //  Used by jTable deleteAction method
-        var buildingdelete = function (postData, jtParams) {
-            var r = confirm('Do you wish to delete ALL rooms and associated invoices ?');
+        var residentdelete = function (postData, jtParams) {
+            var r = confirm('Do you wish to delete ALL associated records ?');
             if (r == true) {
                 return $.Deferred(function ($dfd) {
                     $.ajax({
-                        url: webServiceURL() + '/jTable/BuildingDelete',
+                        url: webServiceURL() + '/jTable/ResidentDelete',
                         type: 'POST',
                         dataType: 'json',
                         data: postData,
@@ -146,7 +158,7 @@
                 //});
                 return $.Deferred(function ($dfd) {
                     $.ajax({
-                        url: webServiceURL() + '/jTable/NopBuilding',
+                        url: webServiceURL() + '/jTable/NopResident',
                         type: 'POST',
                         dataType: 'json',
                         data: postData,
@@ -163,10 +175,10 @@
         }
 
         //  Used by jTable createAction method
-        var buildingcreate = function (postData, jtParams) {
+        var residentcreate = function (postData, jtParams) {
             return $.Deferred(function ($dfd) {
                 $.ajax({
-                    url: webServiceURL() + '/jTable/BuildingCreate',
+                    url: webServiceURL() + '/jTable/ResidentCreate',
                     type: 'POST',
                     dataType: 'json',
                     data: postData,
@@ -181,10 +193,10 @@
         }
 
         //  Used by jTable updateAction method
-        var buildingupdate = function (postData, jtParams) {
+        var residentupdate = function (postData, jtParams) {
             return $.Deferred(function ($dfd) {
                 $.ajax({
-                    url: webServiceURL() + '/jTable/BuildingUpdate',
+                    url: webServiceURL() + '/jTable/ResidentUpdate',
                     type: 'POST',
                     dataType: 'json',
                     data: postData,
@@ -199,10 +211,10 @@
         }
 
         //  Used by jTable listAction method
-        var buildingselect = function (postData, jtParams) {
+        var residentselect = function (postData, jtParams) {
             return $.Deferred(function ($dfd) {
                 $.ajax({
-                    url: webServiceURL() + '/jTable/BuildingSelect',     //  ?' + postData,
+                    url: webServiceURL() + '/jTable/ResidentSelect',     //  ?' + postData,
                     type: 'POST',
                     dataType: 'json',
                     data: postData,
@@ -233,7 +245,7 @@
 
 
     return {
-        displayName: 'Building',
+        displayName: 'Resident',
         images: ko.observableArray([]),
         isLoading: isLoading,
         activate: activate,

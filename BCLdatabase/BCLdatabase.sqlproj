@@ -337,9 +337,28 @@
     <Build Include="Security\aspnet_Personalization_BasicAccess_1.sql" />
     <Build Include="Security\aspnet_Personalization_ReportingAccess_1.sql" />
     <Build Include="Security\aspnet_WebEvent_FullAccess_1.sql" />
+    <Build Include="dbo\Tables\List_US_State.sql" />
+    <Build Include="dbo\Tables\List_PaymentFrequency.sql" />
+    <Build Include="dbo\Tables\BCL_Resident.sql" />
+    <Build Include="dbo\Tables\BCL_BuildingRoom.sql" />
+    <Build Include="dbo\Tables\BCL_BuildingOwnership.sql" />
+    <Build Include="dbo\Tables\BCL_BuildingLease.sql" />
+    <Build Include="dbo\Tables\BCL_Building.sql" />
+    <Build Include="dbo\Stored Procedures\BCL_StateOptions_Select.sql" />
+    <Build Include="dbo\Stored Procedures\BCL_PaymentFrequencyOptions_Select.sql" />
+    <Build Include="dbo\Stored Procedures\BCL_BuildingRoom_Update.sql" />
+    <Build Include="dbo\Stored Procedures\BCL_BuildingRoom_Select.sql" />
+    <Build Include="dbo\Stored Procedures\BCL_BuildingRoom_Delete.sql" />
+    <Build Include="dbo\Stored Procedures\BCL_BuildingRoom_CREATE.sql" />
+    <Build Include="dbo\Stored Procedures\BCL_BuildingOptions_Select.sql" />
+    <Build Include="dbo\Stored Procedures\BCL_Building_Update.sql" />
+    <Build Include="dbo\Stored Procedures\BCL_Building_Select.sql" />
+    <Build Include="dbo\Stored Procedures\BCL_Building_Delete.sql" />
+    <Build Include="dbo\Stored Procedures\BCL_Building_CREATE.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="BCLdatabase.publish.xml" />
+    <None Include="SqlSchemaCompare_local.scmp" />
   </ItemGroup>
   <ItemGroup>
     <ArtifactReference Include="$(DacPacRootPath)\Extensions\Microsoft\SQLDB\Extensions\SqlServer\160\SqlSchemas\master.dacpac">

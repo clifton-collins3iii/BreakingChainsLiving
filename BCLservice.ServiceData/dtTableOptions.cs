@@ -24,10 +24,10 @@ namespace BCLservice.ServiceData
 
         }
 
-        public static List<BuildingOptionsObject> returnBuildingOptionsObject()
+        public static List<jTableOptionsObject> returnBuildingOptionsObject()
         {
-            BuildingOptionsObject obj = new BuildingOptionsObject();
-            List<BuildingOptionsObject> results = new List<BuildingOptionsObject>();
+            jTableOptionsObject obj = new jTableOptionsObject();
+            List<jTableOptionsObject> results = new List<jTableOptionsObject>();
             string _connectionstring = ConfigurationManager.ConnectionStrings["BCLservice.Properties.Settings.dbconnection"].ConnectionString;
             SqlConnection _connection = new SqlConnection(_connectionstring);
             BclDbConnection conn = new BclDbConnection();
@@ -40,8 +40,58 @@ namespace BCLservice.ServiceData
             {
                 foreach (DataRow dr in dt.Rows)
                 {
-                    obj = new BuildingOptionsObject();
+                    obj = new jTableOptionsObject();
                     obj.Value = dr.Field<int>("PK_Building_Id");
+                    obj.DisplayText = dr.Field<string>("Name_Short");
+                    results.Add(obj);
+                }
+            }
+            return results;
+        }
+
+        public static List<jTableStrOptionsObject> returnStatesOptionsObject()
+        {
+            jTableStrOptionsObject obj = new jTableStrOptionsObject();
+            List<jTableStrOptionsObject> results = new List<jTableStrOptionsObject>();
+            string _connectionstring = ConfigurationManager.ConnectionStrings["BCLservice.Properties.Settings.dbconnection"].ConnectionString;
+            SqlConnection _connection = new SqlConnection(_connectionstring);
+            BclDbConnection conn = new BclDbConnection();
+            SqlCommand scmd = new SqlCommand("BCL_StateOptions_Select", _connection);
+            DataTable dt = new DataTable();
+            SqlDataAdapter td = new SqlDataAdapter(scmd);
+            _connection.Open();
+            td.Fill(dt);
+            if (dt.Rows.Count > 0)
+            {
+                foreach (DataRow dr in dt.Rows)
+                {
+                    obj = new jTableStrOptionsObject();
+                    obj.Value = dr.Field<string>("StateAbbr");
+                    obj.DisplayText = dr.Field<string>("State");
+                    results.Add(obj);
+                }
+            }
+            return results;
+        }
+
+        public static List<jTableStrOptionsObject> returnRentPaymentFrequencyOptionsObject()
+        {
+            jTableStrOptionsObject obj = new jTableStrOptionsObject();
+            List<jTableStrOptionsObject> results = new List<jTableStrOptionsObject>();
+            string _connectionstring = ConfigurationManager.ConnectionStrings["BCLservice.Properties.Settings.dbconnection"].ConnectionString;
+            SqlConnection _connection = new SqlConnection(_connectionstring);
+            BclDbConnection conn = new BclDbConnection();
+            SqlCommand scmd = new SqlCommand("BCL_PaymentFrequencyOptions_Select", _connection);
+            DataTable dt = new DataTable();
+            SqlDataAdapter td = new SqlDataAdapter(scmd);
+            _connection.Open();
+            td.Fill(dt);
+            if (dt.Rows.Count > 0)
+            {
+                foreach (DataRow dr in dt.Rows)
+                {
+                    obj = new jTableStrOptionsObject();
+                    obj.Value = dr.Field<string>("Name_Short");
                     obj.DisplayText = dr.Field<string>("Name_Short");
                     results.Add(obj);
                 }

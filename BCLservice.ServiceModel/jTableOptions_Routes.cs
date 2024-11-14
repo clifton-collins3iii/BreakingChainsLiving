@@ -6,7 +6,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BCLservice.ServiceData.BCLservice;
-using BCLservice.ServiceData.Objects;
 namespace BCLservice.ServiceModel
 {
     internal class jTableOptions_Routes
@@ -14,28 +13,20 @@ namespace BCLservice.ServiceModel
     }
 
     [Route("/jTableOptions/BuildingOptionsSelect")]
-    public class jBuildingOptions_Request : IReturn<jBuildingOptionsResponse>
+    public class jBuildingOptions_Request : IReturn<jTableOptionsResponse>
     {
     }
 
-    public class jBuildingOptionsResponse
-    {
-        public string Result { get; set; }
-        public List<BuildingOptionsObject> Options { get; set; }
-        public string Message { get; set; }
-
-        public void New()
-        {
-            this.Options = new List<BuildingOptionsObject>();
-            this.Result = string.Empty;
-            this.Message = string.Empty;
-        }
-    }
-
-    [Route("/jTableOptions/StatesOptionsSelect")]
-    public class jStatesOptions_Request : IReturn<jBuildingOptionsResponse>
+    [Route("/jTableOptions/StateOptionsSelect")]
+    public class jStatesOptions_Request : IReturn<jTableOptionsResponse>
     {
     }
+
+    [Route("/jTableOptions/RentPaymentFrequencyOptionsSelect")]
+    public class jRentPaymentFrequencyOptions_Request : IReturn<jTableOptionsResponse>
+    {
+    }
+
 
     public class jTableOptionsResponse
     {
@@ -46,6 +37,20 @@ namespace BCLservice.ServiceModel
         public void New()
         {
             this.Options = new List<jTableOptionsObject>();
+            this.Result = string.Empty;
+            this.Message = string.Empty;
+        }
+    }
+
+    public class jTableStrOptionsResponse
+    {
+        public string Result { get; set; }
+        public List<jTableStrOptionsObject> Options { get; set; }
+        public string Message { get; set; }
+
+        public void New()
+        {
+            this.Options = new List<jTableStrOptionsObject>();
             this.Result = string.Empty;
             this.Message = string.Empty;
         }
