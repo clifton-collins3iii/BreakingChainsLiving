@@ -9,7 +9,6 @@
         activate: function () {
             router.map([
                 { route: '', title: 'Welcome', moduleId: 'viewmodels/welcome', nav: true },
-                { route: 'flickr', moduleId: 'viewmodels/flickr', nav: true },
                 { route: 'building', title: 'Building Edit', moduleId: 'viewmodels/building', nav: true },
                 { route: 'room', title: 'Room Edit', moduleId: 'viewmodels/room', nav: true },
                 { route: 'resident', title: 'Resident Edit', moduleId: 'viewmodels/resident', nav: true }

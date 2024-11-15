@@ -105,13 +105,21 @@
                     IsActive: {
                         title: 'Active',
                         type: 'checkbox',
-                        values: { 'false': 'Inactive', 'true': 'Active' }
+                        values: { 'false': 'Inactive', 'true': 'Active' },
+                        defaultValue: true
                     },
                     IsDeleted: {
                         title: 'Deleted',
                         type: 'checkbox',
                         values: { 'false': 'NO', 'true': 'DELETED' }
                     }
+                },
+                formCreated: function (event, data) {
+                    // $('#jtable-edit-form').css('height', 'auto');
+                    // $('#jtable-edit-form').css('width', '300px');
+                    $('input[type=text]').each(function () {
+                        $(this).css('width', '100%');
+                    });
                 }
             });
             $('#BuildingTableContainer').jtable('load');

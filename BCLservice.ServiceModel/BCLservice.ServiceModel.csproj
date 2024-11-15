@@ -78,6 +78,7 @@
   <ItemGroup>
     <Compile Include="AppVersions_Route.cs" />
     <Compile Include="BuildingRoom_Route.cs" />
+    <Compile Include="Resident_Route.cs" />
     <Compile Include="Building_Route.cs" />
     <Compile Include="Hello_Request.cs" />
     <Compile Include="jTableOptions_Routes.cs" />
