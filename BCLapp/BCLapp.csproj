@@ -61,6 +61,8 @@
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="System.Runtime" />
+    <Reference Include="System.Runtime.InteropServices" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -184,7 +186,23 @@
     <Content Include="Scripts\bootstrap.esm.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="config.json" />
+    <Content Include="config.json">
+      <TransformOnBuild>true</TransformOnBuild>
+      <BrowseToURL>~/config.json</BrowseToURL>
+    </Content>
+    <None Include="config.Debug.json">
+      <DependentUpon>config.json</DependentUpon>
+      <IsTransformFile>true</IsTransformFile>
+    </None>
+    <None Include="config.Release.json">
+      <DependentUpon>config.json</DependentUpon>
+      <IsTransformFile>true</IsTransformFile>
+    </None>
+    <None Include="config.Release_FTP.json">
+      <DependentUpon>config.json</DependentUpon>
+      <IsTransformFile>true</IsTransformFile>
+    </None>
+    <None Include="Properties\PublishProfiles\Release_FTP.pubxml" />
     <None Include="Scripts\jquery-3.7.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.7.1.js" />
     <Content Include="Scripts\jquery-3.7.1.min.js" />
@@ -446,7 +464,9 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.VisualStudio.SlowCheetah.4.0.50\build\Microsoft.VisualStudio.SlowCheetah.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.VisualStudio.SlowCheetah.4.0.50\build\Microsoft.VisualStudio.SlowCheetah.targets'))" />
   </Target>
+  <Import Project="..\packages\Microsoft.VisualStudio.SlowCheetah.4.0.50\build\Microsoft.VisualStudio.SlowCheetah.targets" Condition="Exists('..\packages\Microsoft.VisualStudio.SlowCheetah.4.0.50\build\Microsoft.VisualStudio.SlowCheetah.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

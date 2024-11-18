@@ -98,7 +98,7 @@
                         width: "20%'"
                     },
                     AddressUnit: {
-                        title: 'Apartment/Suite',
+                        title: 'Apt/Ste',
                         width: '10%'
                     },
                     AddressCity: {
@@ -111,18 +111,20 @@
                         options: stateOptionsJSON
                     },
                     AddressZip: {
-                        title: 'Zip code'
-
+                        title: 'Zip code',
+                        width: '5%',
                     },
                     IsActive: {
                         title: 'Active',
                         type: 'checkbox',
+                        width: '5%',
                         values: { 'false': 'Inactive', 'true': 'Active' },
                         defaultValue: true
                     },
                     IsDeleted: {
                         title: 'Deleted',
                         type: 'checkbox',
+                        width: '5%',
                         values: { 'false': 'NO', 'true': 'DELETED' }
                     }
                 },

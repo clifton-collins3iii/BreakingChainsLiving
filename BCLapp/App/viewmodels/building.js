@@ -29,9 +29,68 @@
             });
         }
 
+        var BuildingRoomResidentControl = function (data) {
+            $('#BuildingRoomResidentTableContainer').jtable({
+                title: 'Rooms and Residents',
+                actions: {
+                    listAction: buildingroomresidentselect,
+                    createAction: buildingroomresidentcreate,
+                    updateAction: buildingroomresidentupdate,
+                    deleteAction: buildingroomresidentdelete
+                },
+                messages: {
+                    deleteConfirmation: 'Edit/Update the Deleted Flag\r\nPressing DELETE is permanent!',
+                },
+                fields: {
+                    PK_RoomResident_Id: {
+                        key: true,
+                        list: false
+                    },
+                    Name_Short: {
+                        title: 'Room Name',
+                        width: '10%'
+                    },
+                    Name_First: {
+                        title: 'Resident Name',
+                        width: '10%'
+                    },
+                    Name_Second: {
+                        title: 'Last Name',
+                        width: '10%'
+                    },
+                    IsActive: {
+                        title: 'Active',
+                        width: '5%',
+                        type: 'checkbox',
+                        values: { 'false': 'Inactive', 'true': 'Active' },
+                        defaultValue: true
+                    },
+                    IsDeleted: {
+                        title: 'Deleted',
+                        width: '5%',
+                        type: 'checkbox',
+                        values: { 'false': 'NO', 'true': 'DELETED' }
+                    }
+                },
+                formCreated: function (event, data) {
+                    // $('#jtable-edit-form').css('height', 'auto');
+                    // $('#jtable-edit-form').css('width', '300px');
+                    $('input[type=text]').each(function () {
+                        $(this).css('width', '100%');
+                    });
+                },
+            })
+
+            $('#BuildingRoomResidentTableContainer').show();
+        }
+
         var compositionComplete = function () {
             $('#BuildingTableContainer').jtable({
                 title: 'Building Edit',
+                selecting: true, //Enable selecting
+                multiselect: false, //Allow multiple selecting
+                selectingCheckboxes: true, //Show checkboxes on first column
+                selectOnRowClick: true, //Enable this to only select using checkboxes
                 actions: {
                     listAction: buildingselect,     // this calls the javascript function buildingselect() below
                     createAction: buildingcreate,
@@ -75,7 +134,7 @@
                     },
                     Name_Long: {
                         title: 'Building Long Name',
-                        width: '20%'
+                        width: '10%'
                     },
                     Description: {
                         title: 'Description of the building',
@@ -86,7 +145,7 @@
                         width: "20%'"
                     },
                     AddressUnit: {
-                        title: 'Apartment/Suite',
+                        title: 'Apt/Ste',
                         width: '10%'
                     },
                     AddressCity: {
@@ -99,17 +158,19 @@
                         options: stateOptionsJSON
                     },
                     AddressZip: {
-                        title: 'Zip code'
-
+                        title: 'Zip code',
+                        width: '5%',
                     },
                     IsActive: {
                         title: 'Active',
+                        width: '5%',
                         type: 'checkbox',
                         values: { 'false': 'Inactive', 'true': 'Active' },
                         defaultValue: true
                     },
                     IsDeleted: {
                         title: 'Deleted',
+                        width: '5%',
                         type: 'checkbox',
                         values: { 'false': 'NO', 'true': 'DELETED' }
                     }
@@ -120,7 +181,33 @@
                     $('input[type=text]').each(function () {
                         $(this).css('width', '100%');
                     });
-                }
+                },
+                //Register to selectionChanged event to hanlde events
+                selectionChanged: function () {
+                    //Get all selected rows
+                    var $selectedRows = $('#BuildingTableContainer').jtable('selectedRows');
+
+                    $('#SelectedRowList').empty();
+                    if ($selectedRows.length > 0) {
+                        //Show selected rows
+                        $selectedRows.each(function () {
+                            var record = $(this).data('record');
+                            //$('#SelectedRowList').append(
+                                //'<b>StudentId</b>: ' + record.StudentId +
+                                //'<br /><b>Name</b>:' + record.Name + '<br /><br />'
+                            //);
+                            //
+                            //  show room - resident table
+                            BuildingRoomResidentControl(record);
+                        });
+                    } else {
+                        //No rows selected
+                        //$('#SelectedRowList').append('No row selected! Select rows to see here...');
+                        //
+                        //  hide the room - resident table
+                        $('#BuildingRoomResidentTableContainer').hide();
+                    }
+                },
             });
             $('#BuildingTableContainer').jtable('load');
             return true;

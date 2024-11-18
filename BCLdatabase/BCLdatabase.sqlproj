@@ -67,6 +67,7 @@
     <Folder Include="Security\" />
     <Folder Include="dbo\Functions\" />
     <Folder Include="dbo\Stored Procedures\" />
+    <Folder Include="DataPopulateScripts" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\aspnet_Applications.sql" />
@@ -355,10 +356,16 @@
     <Build Include="dbo\Stored Procedures\BCL_Building_Select.sql" />
     <Build Include="dbo\Stored Procedures\BCL_Building_Delete.sql" />
     <Build Include="dbo\Stored Procedures\BCL_Building_CREATE.sql" />
+    <Build Include="dbo\Stored Procedures\BCL_Resident_Select.sql" />
+    <Build Include="dbo\Stored Procedures\BCL_Resident_CREATE.sql" />
+    <Build Include="dbo\Stored Procedures\BCL_Resident_Update.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="BCLdatabase.publish.xml" />
     <None Include="SqlSchemaCompare_local.scmp" />
+    <None Include="DataPopulateScripts\List_US_State.sql" />
+    <None Include="DataPopulateScripts\List_PaymentFrequency.sql" />
+    <None Include="SqlSchemaCompare_smarterasp.scmp" />
   </ItemGroup>
   <ItemGroup>
     <ArtifactReference Include="$(DacPacRootPath)\Extensions\Microsoft\SQLDB\Extensions\SqlServer\160\SqlSchemas\master.dacpac">
