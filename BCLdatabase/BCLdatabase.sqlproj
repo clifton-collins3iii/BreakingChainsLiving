@@ -359,6 +359,12 @@
     <Build Include="dbo\Stored Procedures\BCL_Resident_Select.sql" />
     <Build Include="dbo\Stored Procedures\BCL_Resident_CREATE.sql" />
     <Build Include="dbo\Stored Procedures\BCL_Resident_Update.sql" />
+    <Build Include="dbo\Tables\BCL_RoomResident.sql" />
+    <Build Include="dbo\Stored Procedures\BCL_RoomOptions_Select.sql" />
+    <Build Include="dbo\Stored Procedures\BCL_ResidentOptions_Select.sql" />
+    <Build Include="dbo\Stored Procedures\BCL_BuildingRoomResident_Update.sql" />
+    <Build Include="dbo\Stored Procedures\BCL_BuildingRoomResident_Select.sql" />
+    <Build Include="dbo\Stored Procedures\BCL_BuildingRoomResident_CREATE.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="BCLdatabase.publish.xml" />

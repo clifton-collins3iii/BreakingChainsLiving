@@ -62,6 +62,42 @@ namespace BCLservice.ServiceInterface
             }
             return result;
         }
+
+        public object Any(ServiceModel.jResidentOptions_Request request)
+        {
+            ServiceModel.jTableOptionsResponse result = new ServiceModel.jTableOptionsResponse();
+            result.Result = "ERROR";
+            try
+            {
+                result.Options = dtTableOptions_Services.returnResidentOptionsObject();
+                result.Result = "OK";
+                result.Message = "";
+            }
+            catch (Exception ex)
+            {
+                result.Result = "ERROR";
+                result.Message = ex.Message;
+            }
+            return result;
+        }
+
+        public object Any(ServiceModel.jRoomOptions_Request request)
+        {
+            ServiceModel.jTableOptionsResponse result = new ServiceModel.jTableOptionsResponse();
+            result.Result = "ERROR";
+            try
+            {
+                result.Options = dtTableOptions_Services.returnRoomOptionsObject(request.PK_Building_Id);
+                result.Result = "OK";
+                result.Message = "";
+            }
+            catch (Exception ex)
+            {
+                result.Result = "ERROR";
+                result.Message = ex.Message;
+            }
+            return result;
+        }
     }
 
 }

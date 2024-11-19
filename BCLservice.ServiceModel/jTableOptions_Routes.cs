@@ -27,6 +27,16 @@ namespace BCLservice.ServiceModel
     {
     }
 
+    [Route("/jTableOptions/ResidentOptionsSelect")]
+    public class jResidentOptions_Request : IReturn<jTableOptionsResponse>
+    {
+    }
+
+    [Route("/jTableOptions/RoomOptionsSelect")]
+    public class jRoomOptions_Request : IReturn<jTableOptionsResponse>
+    {
+        public string PK_Building_Id { get; set; }
+    }
 
     public class jTableOptionsResponse
     {

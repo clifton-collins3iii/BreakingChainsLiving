@@ -7,9 +7,25 @@
         var isLoading = ko.observable(false);
         var webServiceURL = ko.observable(sessionStorage.getItem('WebService'));
         var stateOptionsArray;
+        var residentOptionsArray;
+        var roomOptionsArray;
+        var rentpaymentOptionsArray;
 
         var stateOptionsJSON = function (data) {
             return stateOptionsArray;
+            //return [{ Value: '1', DisplayText: 'Admin Office' }, { Value: '5', DisplayText: 'Dartmoor' }, { Value: '6', DisplayText: 'Next2' }];
+        }
+
+        var residentOptionsJSON = function (data) {
+            return residentOptionsArray;
+        }
+
+        var roomOptionsJSON = function (data) {
+            return roomOptionsArray;
+        }
+
+        var rentpaymentfrequencyOptionsJSON = function (data) {
+            return rentpaymentOptionsArray;
             //return [{ Value: '1', DisplayText: 'Admin Office' }, { Value: '5', DisplayText: 'Dartmoor' }, { Value: '6', DisplayText: 'Next2' }];
         }
 
@@ -22,6 +38,51 @@
                 success: function (data) {      // {"Result":"OK", "Options":[{"DisplayText": "", "Value":"FK_Building_ID"}, {}, {}]}
                     //buildingOptionsArray = JSON.stringify(data.Options);
                     stateOptionsArray = data.Options;
+                },
+                error: function (request, error, exception) {
+
+                }
+            });
+
+            $.ajax({
+                url: webServiceURL() + '/jTableOptions/RentPaymentFrequencyOptionsSelect',     //  ?' + postData,
+                type: 'POST',
+                dataType: 'json',
+                success: function (data) {      // {"Result":"OK", "Options":[{"DisplayText": "", "Value":"FK_Building_ID"}, {}, {}]}
+                    //buildingOptionsArray = JSON.stringify(data.Options);
+                    rentpaymentOptionsArray = data.Options;
+                },
+                error: function (request, error, exception) {
+
+                }
+            });
+        }
+
+        var getresidentOptionsJSON = function (data) {
+            var DTO = {
+                PK_Building_Id: data.PK_Building_Id
+            }
+            $.ajax({
+                url: webServiceURL() + '/jTableOptions/ResidentOptionsSelect',     //  ?' + postData,
+                type: 'POST',
+                dataType: 'json',
+                data: JSON.stringify(DTO),
+                success: function (data) {      // {"Result":"OK", "Options":[{"DisplayText": "", "Value":"FK_Building_ID"}, {}, {}]}
+                    //buildingOptionsArray = JSON.stringify(data.Options);
+                    residentOptionsArray = data.Options;
+                    $.ajax({
+                        url: webServiceURL() + '/jTableOptions/RoomOptionsSelect',     //  ?' + postData,
+                        type: 'POST',
+                        dataType: 'json',
+                        data: DTO,
+                        success: function (data) {
+                            roomOptionsArray = data.Options;
+                            BuildingRoomResidentControl();
+                        },
+                        error: function (request, error, exception) {
+
+                        }
+                    });
                 },
                 error: function (request, error, exception) {
 
@@ -48,15 +109,23 @@
                     },
                     Name_Short: {
                         title: 'Room Name',
-                        width: '10%'
+                        width: '10%',
+                        options: roomOptionsJSON
                     },
-                    Name_First: {
+                    FK_Resident_ID: {
                         title: 'Resident Name',
-                        width: '10%'
+                        width: '10%',
+                        options: residentOptionsJSON
                     },
-                    Name_Second: {
-                        title: 'Last Name',
-                        width: '10%'
+                    RentPaymentFrequency: {
+                        title: 'Payment Period',
+                        width: '5%',
+                        options: rentpaymentfrequencyOptionsJSON
+                    },
+                    RentPaymentAmount: {
+                        title: 'Payment Amount',
+                        width: '5%',
+                        defaultvalue: 0
                     },
                     IsActive: {
                         title: 'Active',
@@ -80,8 +149,9 @@
                     });
                 },
             })
-
+            $('#BuildingRoomResidentTableContainer').jtable('load');
             $('#BuildingRoomResidentTableContainer').show();
+            return true;
         }
 
         var compositionComplete = function () {
@@ -198,7 +268,8 @@
                             //);
                             //
                             //  show room - resident table
-                            BuildingRoomResidentControl(record);
+                            //BuildingRoomResidentControl(record);
+                            getresidentOptionsJSON(record);
                         });
                     } else {
                         //No rows selected
@@ -310,6 +381,119 @@
                 });
             });
         }
+
+        var buildingselect = function (postData, jtParams) {
+            return $.Deferred(function ($dfd) {
+                $.ajax({
+                    url: webServiceURL() + '/jTable/BuildingSelect',     //  ?' + postData,
+                    type: 'POST',
+                    dataType: 'json',
+                    data: postData,
+                    success: function (data) {
+                        $dfd.resolve(data);
+                    },
+                    error: function (request, error, exception) {
+                        $dfd.reject();
+                    }
+                });
+            });
+        }
+
+        var buildingroomresidentselect = function (postData, jtParams) {
+            return $.Deferred(function ($dfd) {
+                $.ajax({
+                    url: webServiceURL() + '/jTable/BuildingRoomResidentSelect',     //  ?' + postData,
+                    type: 'POST',
+                    dataType: 'json',
+                    data: postData,
+                    success: function (data) {
+                        $dfd.resolve(data);
+                    },
+                    error: function (request, error, exception) {
+                        $dfd.reject();
+                    }
+                });
+            });
+        }
+
+        var buildingroomresidentcreate = function (postData, jtParams) {
+            return $.Deferred(function ($dfd) {
+                $.ajax({
+                    url: webServiceURL() + '/jTable/BuildingRoomResidentCreate',     //  ?' + postData,
+                    type: 'POST',
+                    dataType: 'json',
+                    data: postData,
+                    success: function (data) {
+                        $dfd.resolve(data);
+                    },
+                    error: function (request, error, exception) {
+                        $dfd.reject();
+                    }
+                });
+            });
+        }
+
+        var buildingroomresidentdelete = function (postData, jtParams) {
+            var r = confirm('Do you wish to delete this room-resident relationship ?');
+            if (r == true) {
+                return $.Deferred(function ($dfd) {
+                    $.ajax({
+                        url: webServiceURL() + '/jTable/BuildingRoomResidentDelete',
+                        type: 'POST',
+                        dataType: 'json',
+                        data: postData,
+                        success: function (data) {
+                            $dfd.resolve(data);
+                        },
+                        error: function (request, error, exception) {
+                            $dfd.reject();
+                        }
+                    });
+                });
+            } else {
+                //return $.Deferred(function ($dfd) {
+                //    try {
+                //        //$dfd.reject();
+                //        $dfd.resolve();
+                //    } catch {
+                //    }
+                //});
+                return $.Deferred(function ($dfd) {
+                    $.ajax({
+                        url: webServiceURL() + '/jTable/NopBuilding',
+                        type: 'POST',
+                        dataType: 'json',
+                        data: postData,
+                        success: function (data) {
+                            $dfd.resolve(data);
+                        },
+                        error: function (request, error, exception) {
+                            $dfd.reject();
+                        }
+                    });
+                });
+            };
+
+        }
+
+        var buildingroomresidentupdate = function (postData, jtParams) {
+            return $.Deferred(function ($dfd) {
+                $.ajax({
+                    url: webServiceURL() + '/jTable/BuildingRoomResidentUpdate',     //  ?' + postData,
+                    type: 'POST',
+                    dataType: 'json',
+                    data: postData,
+                    success: function (data) {
+                        $dfd.resolve(data);
+                    },
+                    error: function (request, error, exception) {
+                        $dfd.reject();
+                    }
+                });
+            });
+        }
+
+
 
         var jtableCallback = function (evt) {
             isLoading(true);

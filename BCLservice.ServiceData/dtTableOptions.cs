@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 
-
 namespace BCLservice.ServiceData
 {
     using System.Data;
@@ -92,6 +91,59 @@ namespace BCLservice.ServiceData
                 {
                     obj = new jTableStrOptionsObject();
                     obj.Value = dr.Field<string>("Name_Short");
+                    obj.DisplayText = dr.Field<string>("Name_Short");
+                    results.Add(obj);
+                }
+            }
+            return results;
+        }
+
+        public static List<jTableOptionsObject> returnResidentOptionsObject()
+        {
+            jTableOptionsObject obj = new jTableOptionsObject();
+            List<jTableOptionsObject> results = new List<jTableOptionsObject>();
+            string _connectionstring = ConfigurationManager.ConnectionStrings["BCLservice.Properties.Settings.dbconnection"].ConnectionString;
+            SqlConnection _connection = new SqlConnection(_connectionstring);
+            BclDbConnection conn = new BclDbConnection();
+            SqlCommand scmd = new SqlCommand("BCL_ResidentOptions_Select", _connection);
+            DataTable dt = new DataTable();
+            SqlDataAdapter td = new SqlDataAdapter(scmd);
+            _connection.Open();
+            td.Fill(dt);
+            if (dt.Rows.Count > 0)
+            {
+                foreach (DataRow dr in dt.Rows)
+                {
+                    obj = new jTableOptionsObject();
+                    obj.Value = dr.Field<int>("PK_Resident_Id");
+                    obj.DisplayText = dr.Field<string>("ResidentName");
+                    results.Add(obj);
+                }
+            }
+            return results;
+        }
+
+        public static List<jTableOptionsObject> returnRoomOptionsObject(string PK_Building_Id)
+        {
+            jTableOptionsObject obj = new jTableOptionsObject();
+            List<jTableOptionsObject> results = new List<jTableOptionsObject>();
+            string _connectionstring = ConfigurationManager.ConnectionStrings["BCLservice.Properties.Settings.dbconnection"].ConnectionString;
+            SqlConnection _connection = new SqlConnection(_connectionstring);
+            BclDbConnection conn = new BclDbConnection();
+            SqlCommand scmd = new SqlCommand("BCL_RoomOptions_Select", _connection);
+            scmd.CommandType = CommandType.StoredProcedure;
+            scmd.CommandTimeout = 120;
+            scmd.Parameters.Add(new SqlParameter("@PK_Building_Id", PK_Building_Id));
+            DataTable dt = new DataTable();
+            SqlDataAdapter td = new SqlDataAdapter(scmd);
+            _connection.Open();
+            td.Fill(dt);
+            if (dt.Rows.Count > 0)
+            {
+                foreach (DataRow dr in dt.Rows)
+                {
+                    obj = new jTableOptionsObject();
+                    obj.Value = dr.Field<int>("PK_BuildingRoom_Id");
                     obj.DisplayText = dr.Field<string>("Name_Short");
                     results.Add(obj);
                 }
