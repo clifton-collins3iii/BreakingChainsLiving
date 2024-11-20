@@ -26,7 +26,7 @@ BEGIN
 	Values (@FK_Resident_Id, @FK_BuildingRoom_Id, @RentPaymentFrequency, @RentPaymentAmount, @IsActive, @IsDeleted)
 	Set @PK_RoomResident_Id = @@IDENTITY
 
-	Select brr.PK_RoomResident_Id, bbr.Name_Short, FK_Resident_Id, bbr.RentPaymentFrequency, bbr.RentPaymentAmount, bbr.IsActive, bbr.IsDeleted
+	Select brr.PK_RoomResident_Id, FK_BuildingRoom_Id, FK_Resident_Id, bbr.RentPaymentFrequency, bbr.RentPaymentAmount, bbr.IsActive, bbr.IsDeleted
 	From BCL_BuildingRoom bbr
 	Inner Join BCL_RoomResident brr on brr.FK_BuildingRoom_Id = bbr.PK_BuildingRoom_Id
 	Inner Join BCL_Resident br on br.PK_Resident_Id = brr.FK_Resident_Id

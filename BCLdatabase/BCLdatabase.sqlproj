@@ -365,6 +365,7 @@
     <Build Include="dbo\Stored Procedures\BCL_BuildingRoomResident_Update.sql" />
     <Build Include="dbo\Stored Procedures\BCL_BuildingRoomResident_Select.sql" />
     <Build Include="dbo\Stored Procedures\BCL_BuildingRoomResident_CREATE.sql" />
+    <Build Include="dbo\Stored Procedures\BCL_BuildingRoomResident_Delete.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="BCLdatabase.publish.xml" />

@@ -15,7 +15,7 @@ namespace BCLservice.ServiceInterface
             try
             {
                 BuildingRoomResidentObject brow = new BuildingRoomResidentObject();
-                brow.PK_BuildingRoomResident_Id = 0;
+                brow.PK_RoomResident_Id = 0;
                 List<BuildingRoomResidentObject> bobj = new List<BuildingRoomResidentObject>();
                 bobj.Add(brow);
                 result.Records = bobj;
@@ -49,7 +49,7 @@ namespace BCLservice.ServiceInterface
             result.Result = "ERROR";
             try
             {
-                result.Records = dtBuildingRoomResident.returnBuildingRoomResidentObject(request.FK_BuildingRoom_Id);
+                result.Records = dtBuildingRoomResident.returnBuildingRoomResidentObject(request.FK_Building_Id);
                 result.TotalRecordCount = result.Records.Count;
                 result.Result = "OK";
                 result.Message = "";

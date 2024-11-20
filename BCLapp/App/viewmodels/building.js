@@ -6,10 +6,12 @@
         //See the "welcome" module for an example of function export.
         var isLoading = ko.observable(false);
         var webServiceURL = ko.observable(sessionStorage.getItem('WebService'));
+        var showRooms = ko.observable(false);
         var stateOptionsArray;
         var residentOptionsArray;
         var roomOptionsArray;
         var rentpaymentOptionsArray;
+        var buildingselected;
 
         var stateOptionsJSON = function (data) {
             return stateOptionsArray;
@@ -59,6 +61,7 @@
         }
 
         var getresidentOptionsJSON = function (data) {
+            buildingselected = data.PK_Building_Id;
             var DTO = {
                 PK_Building_Id: data.PK_Building_Id
             }
@@ -77,7 +80,7 @@
                         data: DTO,
                         success: function (data) {
                             roomOptionsArray = data.Options;
-                            BuildingRoomResidentControl();
+                            BuildingRoomResidentControl(DTO);
                         },
                         error: function (request, error, exception) {
 
@@ -90,7 +93,7 @@
             });
         }
 
-        var BuildingRoomResidentControl = function (data) {
+        var BuildingRoomResidentControl = function (dto) {
             $('#BuildingRoomResidentTableContainer').jtable({
                 title: 'Rooms and Residents',
                 actions: {
@@ -107,12 +110,12 @@
                         key: true,
                         list: false
                     },
-                    Name_Short: {
+                    FK_BuildingRoom_Id: {
                         title: 'Room Name',
                         width: '10%',
                         options: roomOptionsJSON
                     },
-                    FK_Resident_ID: {
+                    FK_Resident_Id: {
                         title: 'Resident Name',
                         width: '10%',
                         options: residentOptionsJSON
@@ -150,7 +153,8 @@
                 },
             })
             $('#BuildingRoomResidentTableContainer').jtable('load');
-            $('#BuildingRoomResidentTableContainer').show();
+            //$('#BuildingRoomResidentTableContainer').show();
+            showRooms(true);
             return true;
         }
 
@@ -276,7 +280,8 @@
                         //$('#SelectedRowList').append('No row selected! Select rows to see here...');
                         //
                         //  hide the room - resident table
-                        $('#BuildingRoomResidentTableContainer').hide();
+                        //$('#BuildingRoomResidentTableContainer').hide();
+                        showRooms(false);
                     }
                 },
             });
@@ -400,12 +405,15 @@
         }
 
         var buildingroomresidentselect = function (postData, jtParams) {
+            var DTO = {
+                FK_Building_Id: buildingselected
+            }
             return $.Deferred(function ($dfd) {
                 $.ajax({
                     url: webServiceURL() + '/jTable/BuildingRoomResidentSelect',     //  ?' + postData,
                     type: 'POST',
                     dataType: 'json',
-                    data: postData,
+                    data: DTO,
                     success: function (data) {
                         $dfd.resolve(data);
                     },
@@ -518,5 +526,6 @@
         activate: activate,
         compositionComplete: compositionComplete,
         webServiceURL: webServiceURL,
+        showRooms: showRooms,
     };
 });

@@ -27,6 +27,9 @@ namespace BCLservice.ServiceData
         {
             jTableOptionsObject obj = new jTableOptionsObject();
             List<jTableOptionsObject> results = new List<jTableOptionsObject>();
+            obj.Value = 0;
+            obj.DisplayText = "Select a Building";
+            results.Add(obj);
             string _connectionstring = ConfigurationManager.ConnectionStrings["BCLservice.Properties.Settings.dbconnection"].ConnectionString;
             SqlConnection _connection = new SqlConnection(_connectionstring);
             BclDbConnection conn = new BclDbConnection();
@@ -52,6 +55,9 @@ namespace BCLservice.ServiceData
         {
             jTableStrOptionsObject obj = new jTableStrOptionsObject();
             List<jTableStrOptionsObject> results = new List<jTableStrOptionsObject>();
+            obj.Value = "0";
+            obj.DisplayText = "Select a State";
+            results.Add(obj);
             string _connectionstring = ConfigurationManager.ConnectionStrings["BCLservice.Properties.Settings.dbconnection"].ConnectionString;
             SqlConnection _connection = new SqlConnection(_connectionstring);
             BclDbConnection conn = new BclDbConnection();
@@ -102,6 +108,9 @@ namespace BCLservice.ServiceData
         {
             jTableOptionsObject obj = new jTableOptionsObject();
             List<jTableOptionsObject> results = new List<jTableOptionsObject>();
+            obj.Value = 0;
+            obj.DisplayText = "Vacant";
+            results.Add(obj);
             string _connectionstring = ConfigurationManager.ConnectionStrings["BCLservice.Properties.Settings.dbconnection"].ConnectionString;
             SqlConnection _connection = new SqlConnection(_connectionstring);
             BclDbConnection conn = new BclDbConnection();
@@ -127,6 +136,8 @@ namespace BCLservice.ServiceData
         {
             jTableOptionsObject obj = new jTableOptionsObject();
             List<jTableOptionsObject> results = new List<jTableOptionsObject>();
+            obj.Value = 0;
+            obj.DisplayText = "None";
             string _connectionstring = ConfigurationManager.ConnectionStrings["BCLservice.Properties.Settings.dbconnection"].ConnectionString;
             SqlConnection _connection = new SqlConnection(_connectionstring);
             BclDbConnection conn = new BclDbConnection();

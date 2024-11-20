@@ -51,8 +51,9 @@ namespace BCLservice.ServiceModel
     }
 
     [Route("/jTable/BuildingRoomResidentSelect")]
-    public class jBuildingRoomResidentSelect_Request : BuildingRoomResidentObjectRow, IReturn<jBuildingRoomResidentResponse>
+    public class jBuildingRoomResidentSelect_Request : IReturn<jBuildingRoomResidentResponse>
     {
+        public int FK_Building_Id { get; set; }
     }
 
     [Route("/jTable/BuildingRoomResidentUpdate")]

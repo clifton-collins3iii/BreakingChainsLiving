@@ -31,7 +31,7 @@ namespace BCLservice.ServiceData
             }
 
             
-            public static List<BuildingRoomResidentObject> returnBuildingRoomResidentObject(int FK_BuildingRoom_Id)
+            public static List<BuildingRoomResidentObject> returnBuildingRoomResidentObject(int FK_Building_Id)
             {
                 BuildingRoomResidentObject obj = new BuildingRoomResidentObject();
                 List<BuildingRoomResidentObject> results = new List<BuildingRoomResidentObject>();
@@ -41,7 +41,7 @@ namespace BCLservice.ServiceData
                 SqlCommand scmd = new SqlCommand("BCL_BuildingRoomResident_Select", _connection);
                 scmd.CommandType = CommandType.StoredProcedure;
                 scmd.CommandTimeout = 31;
-                scmd.Parameters.Add(new SqlParameter("@FK_BuildingRoom_Id", FK_BuildingRoom_Id));
+                scmd.Parameters.Add(new SqlParameter("@FK_Building_Id", FK_Building_Id));
                 DataTable dt = new DataTable();
                 SqlDataAdapter td = new SqlDataAdapter(scmd);
                 _connection.Open();
@@ -51,12 +51,9 @@ namespace BCLservice.ServiceData
                     foreach (DataRow dr in dt.Rows)
                     {
                         obj = new BuildingRoomResidentObject();
-                        obj.PK_BuildingRoomResident_Id = dr.Field<int>("PK_BuildingRoomResident_Id");
+                        obj.PK_RoomResident_Id = dr.Field<int>("PK_RoomResident_Id");
                         obj.FK_Resident_Id = dr.Field<int>("FK_Resident_Id");
                         obj.FK_BuildingRoom_Id = dr.Field<int>("FK_BuildingRoom_Id");
-                        obj.Name_Short = dr.Field<string>("Name_Short");
-                        obj.Name_Long = dr.Field<string>("Name_Long");
-                        obj.Description = dr.Field<string>("Description");
                         obj.RentPaymentFrequency = dr.Field<string>("RentPaymentFrequency");
                         obj.RentPaymentAmount = dr.Field<decimal>("RentPaymentAmount");
                         obj.IsActive = dr.Field<bool>("IsActive");
@@ -88,12 +85,9 @@ namespace BCLservice.ServiceData
                     foreach (DataRow dr in dt.Rows)
                     {
                         obj = new BuildingRoomResidentObject();
-                        obj.PK_BuildingRoomResident_Id = dr.Field<int>("PK_BuildingRoomResident_Id");
+                        obj.PK_RoomResident_Id = dr.Field<int>("PK_RoomResident_Id");
                         obj.FK_Resident_Id = dr.Field<int>("FK_Resident_Id");
                         obj.FK_BuildingRoom_Id = dr.Field<int>("FK_BuildingRoom_Id");
-                        obj.Name_Short = dr.Field<string>("Name_Short");
-                        obj.Name_Long = dr.Field<string>("Name_Long");
-                        obj.Description = dr.Field<string>("Description");
                         obj.RentPaymentFrequency = dr.Field<string>("RentPaymentFrequency");
                         obj.RentPaymentAmount = dr.Field<decimal>("RentPaymentAmount");
                         obj.IsActive = dr.Field<bool>("IsActive");
@@ -123,7 +117,7 @@ namespace BCLservice.ServiceData
                 {
                     foreach (DataRow dr in dt.Rows)
                     {
-                        obj.PK_BuildingRoomResident_Id = dr.Field<int>("PK_RoomResident_Id");
+                        obj.PK_RoomResident_Id = dr.Field<int>("PK_RoomResident_Id");
                         obj.FK_Resident_Id = dr.Field<int>("FK_Resident_Id");
                         obj.FK_BuildingRoom_Id = dr.Field<int>("FK_BuildingRoom_Id");
                         obj.RentPaymentFrequency = dr.Field<string>("RentPaymentFrequency");

@@ -95,7 +95,8 @@
                     },
                     AddressStreet: {
                         title: 'Street Address',
-                        width: "20%'"
+                        width: "20%'",
+                        defaultValue: 'NA'
                     },
                     AddressUnit: {
                         title: 'Apt/Ste',
@@ -103,7 +104,8 @@
                     },
                     AddressCity: {
                         title: 'City',
-                        width: '10%'
+                        width: '10%',
+                        defaultValue: 'Baton Rouge'
                     },
                     AddressState: {
                         title: 'STATE',
@@ -113,6 +115,7 @@
                     AddressZip: {
                         title: 'Zip code',
                         width: '5%',
+                        defaultValue: '70809'
                     },
                     IsActive: {
                         title: 'Active',

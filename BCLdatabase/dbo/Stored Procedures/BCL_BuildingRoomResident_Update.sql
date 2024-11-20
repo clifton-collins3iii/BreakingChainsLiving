@@ -22,12 +22,18 @@ BEGIN
 		@IsActive as bit = JSON_VALUE(@Request, '$.IsActive'),
 		@IsDeleted as bit = JSON_VALUE(@Request, '$.IsDeleted')
 
+	If @PK_RoomResident_Id = 0 Or @PK_RoomResident_Id Is Null Begin
+			Insert Into BCL_RoomResident (FK_Resident_Id, FK_BuildingRoom_Id, RentPaymentFrequency, RentPaymentAmount, IsActive, IsDeleted)
+			Values (@FK_Resident_Id, @FK_BuildingRoom_Id, @RentPaymentFrequency, @RentPaymentAmount, @IsActive, @IsDeleted)
+			Set @PK_RoomResident_Id = @@IDENTITY
+	End Else Begin
 	Update BCL_RoomResident
-	Set FK_Resident_Id = @FK_Resident_Id, FK_BuildingRoom_Id = @FK_BuildingRoom_Id, RentPaymentFrequency = @RentPaymentFrequency, RentPaymentAmount = @RentPaymentAmount,
-		IsActive = @IsActive, IsDeleted = @IsDeleted
-	Where PK_RoomResident_Id = @PK_RoomResident_Id
-
-	Select brr.PK_RoomResident_Id, bbr.Name_Short, FK_Resident_Id, bbr.RentPaymentFrequency, bbr.RentPaymentAmount, bbr.IsActive, bbr.IsDeleted
+		Set FK_Resident_Id = @FK_Resident_Id, FK_BuildingRoom_Id = @FK_BuildingRoom_Id, RentPaymentFrequency = @RentPaymentFrequency, RentPaymentAmount = @RentPaymentAmount,
+			IsActive = @IsActive, IsDeleted = @IsDeleted
+		Where PK_RoomResident_Id = @PK_RoomResident_Id
+	End
+	-- return row
+	Select brr.PK_RoomResident_Id, FK_BuildingRoom_Id, FK_Resident_Id, bbr.RentPaymentFrequency, bbr.RentPaymentAmount, bbr.IsActive, bbr.IsDeleted
 	From BCL_BuildingRoom bbr
 	Inner Join BCL_RoomResident brr on brr.FK_BuildingRoom_Id = bbr.PK_BuildingRoom_Id
 	Inner Join BCL_Resident br on br.PK_Resident_Id = brr.FK_Resident_Id

@@ -10,7 +10,7 @@ namespace BCLservice.ServiceData
     {
         public BuildingRoomResidentObject() { }
 
-        public int PK_BuildingRoomResident_Id { get; set; }
+        public int PK_RoomResident_Id { get; set; }
         public int FK_Resident_Id { get; set; }
         public int FK_BuildingRoom_Id { get; set; }
         public DateTime CreatedDate { get; set; }
@@ -29,7 +29,7 @@ namespace BCLservice.ServiceData
 
     public class BuildingRoomResidentObjectRow
     {
-        public int PK_BuildingRoomResident_Id { get; set; }
+        public int PK_RoomResident_Id { get; set; }
         public int FK_Resident_Id { get; set; }
         public int FK_BuildingRoom_Id { get; set; }
         public DateTime CreatedDate { get; set; }
