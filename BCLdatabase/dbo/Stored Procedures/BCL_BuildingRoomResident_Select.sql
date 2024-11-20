@@ -16,6 +16,7 @@ BEGIN
 		Coalesce(FK_Resident_Id, 0) As FK_Resident_Id,
 		Coalesce(brr.RentPaymentFrequency, bbr.RentPaymentFrequency) As RentPaymentFrequency, 
 		Coalesce(brr.RentPaymentAmount, bbr.RentPaymentAmount) As RentPaymentAmount, 
+		brr.EffectiveDate, brr.TerminationDate,
 		Coalesce(brr.IsActive, bbr.IsActive) As IsActive, 
 		Coalesce(brr.IsDeleted, bbr.IsDeleted) as IsDeleted
 	From 

@@ -56,6 +56,8 @@ namespace BCLservice.ServiceData
                         obj.FK_BuildingRoom_Id = dr.Field<int>("FK_BuildingRoom_Id");
                         obj.RentPaymentFrequency = dr.Field<string>("RentPaymentFrequency");
                         obj.RentPaymentAmount = dr.Field<decimal>("RentPaymentAmount");
+                        obj.EffectiveDate = dr.Field<DateTime>("EffectiveDate");
+                        obj.TerminationDate = dr.Field<DateTime>("TerminationDate");
                         obj.IsActive = dr.Field<bool>("IsActive");
                         obj.IsDeleted = dr.Field<bool>("IsDeleted");
                         results.Add(obj);

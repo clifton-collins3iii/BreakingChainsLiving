@@ -68,6 +68,7 @@
     <Folder Include="dbo\Functions\" />
     <Folder Include="dbo\Stored Procedures\" />
     <Folder Include="DataPopulateScripts" />
+    <Folder Include="DataUpdateScripts" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\aspnet_Applications.sql" />
@@ -385,5 +386,8 @@
       <SuppressMissingDependenciesErrors>False</SuppressMissingDependenciesErrors>
       <DatabaseVariableLiteralValue>msdb</DatabaseVariableLiteralValue>
     </ArtifactReference>
+  </ItemGroup>
+  <ItemGroup>
+    <PostDeploy Include="DataUpdateScripts\Script.PostDeployment.sql" />
   </ItemGroup>
 </Project>

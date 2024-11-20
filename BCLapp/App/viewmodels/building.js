@@ -130,6 +130,19 @@
                         width: '5%',
                         defaultvalue: 0
                     },
+                    EffectiveDate: {
+                        title: 'Effective Date',
+                        width: '5%',
+                        type: 'date',
+                        displayFormat: 'yy-mm-dd'
+                    },
+                    TerminationDate: {
+                        title: 'Termination Date',
+                        list: false,
+                        type: 'date',
+                        displayFormat: 'yy-mm-dd',
+                        defaultValue: '2099-12-31'
+                    },
                     IsActive: {
                         title: 'Active',
                         width: '5%',
