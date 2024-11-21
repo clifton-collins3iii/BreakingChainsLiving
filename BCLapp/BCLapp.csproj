@@ -178,6 +178,7 @@
     <Content Include="Content\themes\base\theme.css" />
     <Content Include="Content\themes\base\tooltip.css" />
     <Content Include="fonts\fontawesome-webfont.svg" />
+    <Content Include="HtmlPage1.html" />
     <Content Include="index.html" />
     <Content Include="readme.md" />
     <Content Include="Scripts\bootstrap.bundle.js" />

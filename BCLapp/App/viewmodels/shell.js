@@ -1,4 +1,4 @@
-﻿define(['plugins/router', 'durandal/app'], function (router, app) {
+﻿define(['plugins/router', 'durandal/app', 'jquery'], function (router, app, $) {
     return {
         router: router,
         search: function () {
@@ -16,5 +16,8 @@
 
             return router.activate();
         }
+        //$.('#menuToggle').click(function () {
+        //
+        //});
     };
 });

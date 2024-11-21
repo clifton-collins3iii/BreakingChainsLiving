@@ -118,7 +118,14 @@
                     FK_Resident_Id: {
                         title: 'Resident Name',
                         width: '10%',
-                        options: residentOptionsJSON
+                        options: residentOptionsJSON,
+                        //display: function (data) {
+                        //    if (data.record.FK_Resident_Id == 0) {
+                        //        return '<span style="background-color: yellow">Vacant</span>'
+                        //    } else {
+                        //        return data.record.FK_Resident_Id;
+                        //    }
+                        //}
                     },
                     RentPaymentFrequency: {
                         title: 'Payment Period',
@@ -148,7 +155,14 @@
                         width: '5%',
                         type: 'checkbox',
                         values: { 'false': 'Inactive', 'true': 'Active' },
-                        defaultValue: true
+                        defaultValue: true,
+                        display: function (data) {
+                            if (data.record.FK_Resident_Id == 0  && data.record.IsActive == true) {
+                                return '<span style="background-color: yellow">Vacant</span>'
+                            } else {
+                                return data.record.IsActive;
+                            }
+                        }
                     },
                     IsDeleted: {
                         title: 'Deleted',

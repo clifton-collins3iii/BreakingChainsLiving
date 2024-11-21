@@ -4,7 +4,7 @@
         'durandal': '../Scripts/durandal',
         'plugins': '../Scripts/durandal/plugins',
         'transitions': '../Scripts/durandal/transitions',
-        'bootstrap': '../Scripts/bootstrap',
+        'bootstrap': '../Scripts/bootstrap.bundle.min',
         'jquery': '../Scripts/jquery-3.7.1',
         'jquery-ui': '../Scripts/jquery-ui-1-13.3',
         'knockout': '../Scripts/knockout-3.5.1',
@@ -26,8 +26,8 @@
 //define('jquery', function() { return jQuery; });
 //define('knockout', ko);
 
-define(['durandal/system', 'durandal/app', 'durandal/viewLocator', 'jquery', 'knockout'],
-    function (system, app, viewLocator, $, ko) {
+define(['durandal/system', 'durandal/app', 'durandal/viewLocator', 'jquery', 'knockout', 'bootstrap'],
+    function (system, app, viewLocator, $, ko, bs) {
     //>>excludeStart("build", true);
     system.debug(true);
     //>>excludeEnd("build");
