@@ -367,6 +367,21 @@
     <Build Include="dbo\Stored Procedures\BCL_BuildingRoomResident_Select.sql" />
     <Build Include="dbo\Stored Procedures\BCL_BuildingRoomResident_CREATE.sql" />
     <Build Include="dbo\Stored Procedures\BCL_BuildingRoomResident_Delete.sql" />
+    <Build Include="dbo\Stored Procedures\BCL_Dashboard_Vacancy.sql" />
+    <Build Include="dbo\Tables\BCL_SourceContacts.sql" />
+    <Build Include="dbo\Tables\BCL_Source.sql" />
+    <Build Include="dbo\Tables\BCL_Contacts.sql" />
+    <Build Include="dbo\Stored Procedures\BCL_Source_CREATE.sql" />
+    <Build Include="dbo\Stored Procedures\BCL_SourceContacts_Select.sql" />
+    <Build Include="dbo\Stored Procedures\BCL_SourceContacts_Delete.sql" />
+    <Build Include="dbo\Stored Procedures\BCL_SourceContacts_CREATE.sql" />
+    <Build Include="dbo\Stored Procedures\BCL_Source_Update.sql" />
+    <Build Include="dbo\Stored Procedures\BCL_Source_Select.sql" />
+    <Build Include="dbo\Stored Procedures\BCL_Source_Delete.sql" />
+    <Build Include="dbo\Stored Procedures\BCL_Contacts_Update.sql" />
+    <Build Include="dbo\Stored Procedures\BCL_Contacts_Select.sql" />
+    <Build Include="dbo\Stored Procedures\BCL_Contacts_Delete.sql" />
+    <Build Include="dbo\Stored Procedures\BCL_Contacts_CREATE.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="BCLdatabase.publish.xml" />

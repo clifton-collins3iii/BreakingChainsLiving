@@ -84,6 +84,7 @@
     <Compile Include="Hello_Request.cs" />
     <Compile Include="jTableOptions_Routes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Source_Route.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Types\" />

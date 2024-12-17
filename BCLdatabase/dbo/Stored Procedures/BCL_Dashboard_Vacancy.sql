@@ -3,8 +3,8 @@
 -- Create date: <Create Date,,>
 -- Description:	<Description,,>
 -- =============================================
-CREATE PROCEDURE [dbo].[BCL_BuildingRoomResident_Select]
-	@FK_Building_Id	int
+CREATE PROCEDURE BCL_Dashboard_Vacancy
+	
 AS
 BEGIN
 	-- SET NOCOUNT ON added to prevent extra result sets from
@@ -14,6 +14,7 @@ BEGIN
 		Coalesce(brr.PK_RoomResident_Id, 0) As PK_RoomResident_Id, 
 		Coalesce(FK_BuildingRoom_Id, bbr.PK_BuildingRoom_Id) As FK_BuildingRoom_Id,
 		Coalesce(FK_Resident_Id, 0) As FK_Resident_Id,
+		bb.Name_Short, bbr.Name_Short,
 		Coalesce(brr.RentPaymentFrequency, bbr.RentPaymentFrequency) As RentPaymentFrequency, 
 		Coalesce(brr.RentPaymentAmount, bbr.RentPaymentAmount) As RentPaymentAmount, 
 		Coalesce(brr.EffectiveDate, GetDate()) As EffectiveDate, 
@@ -28,6 +29,5 @@ BEGIN
 	Where 
 		Coalesce(brr.IsActive, bbr.IsActive) = 1 
 		And Coalesce(brr.IsDeleted, bbr.IsDeleted) = 0
-		And
-		bbr.FK_Building_Id = @FK_Building_Id
+		And FK_Resident_Id = 0
 END
