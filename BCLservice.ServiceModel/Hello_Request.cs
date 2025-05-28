@@ -1,5 +1,4 @@
 using ServiceStack;
-using ServiceStack;
 
 namespace BCLservice.ServiceModel
 {

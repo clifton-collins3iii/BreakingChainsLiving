@@ -161,5 +161,35 @@ namespace BCLservice.ServiceData
             }
             return results;
         }
+
+        public static List<jTableOptionsObject> returnContactOptionsObject(string PK_Source_Id)
+        {
+            jTableOptionsObject obj = new jTableOptionsObject();
+            List<jTableOptionsObject> results = new List<jTableOptionsObject>();
+            obj.Value = 0;
+            obj.DisplayText = "None";
+            string _connectionstring = ConfigurationManager.ConnectionStrings["BCLservice.Properties.Settings.dbconnection"].ConnectionString;
+            SqlConnection _connection = new SqlConnection(_connectionstring);
+            BclDbConnection conn = new BclDbConnection();
+            SqlCommand scmd = new SqlCommand("BCL_ContactOptions_Select", _connection);
+            scmd.CommandType = CommandType.StoredProcedure;
+            scmd.CommandTimeout = 120;
+            scmd.Parameters.Add(new SqlParameter("@PK_Source_Id", PK_Source_Id));
+            DataTable dt = new DataTable();
+            SqlDataAdapter td = new SqlDataAdapter(scmd);
+            _connection.Open();
+            td.Fill(dt);
+            if (dt.Rows.Count > 0)
+            {
+                foreach (DataRow dr in dt.Rows)
+                {
+                    obj = new jTableOptionsObject();
+                    obj.Value = dr.Field<int>("PK_SourceContact_Id");
+                    obj.DisplayText = dr.Field<string>("ContactName");
+                    results.Add(obj);
+                }
+            }
+            return results;
+        }
     }
 }

@@ -91,6 +91,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App\main.js" />
+    <Content Include="App\viewmodels\contact.js" />
     <Content Include="App\viewmodels\source.js" />
     <Content Include="App\viewmodels\resident.js" />
     <Content Include="App\viewmodels\room.js" />
@@ -98,6 +99,7 @@
     <Content Include="App\viewmodels\flickr.js" />
     <Content Include="App\viewmodels\shell.js" />
     <Content Include="App\viewmodels\welcome.js" />
+    <Content Include="App\views\contact.html" />
     <Content Include="App\views\source.html" />
     <Content Include="App\views\resident.html" />
     <Content Include="App\views\room.html" />

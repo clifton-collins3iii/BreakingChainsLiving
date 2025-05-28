@@ -98,6 +98,24 @@ namespace BCLservice.ServiceInterface
             }
             return result;
         }
+
+        public object Any(ServiceModel.jContactOptions_Request request)
+        {
+            ServiceModel.jTableOptionsResponse result = new ServiceModel.jTableOptionsResponse();
+            result.Result = "ERROR";
+            try
+            {
+                result.Options = dtTableOptions_Services.returnContactOptionsObject(request.PK_Source_Id);
+                result.Result = "OK";
+                result.Message = "";
+            }
+            catch (Exception ex)
+            {
+                result.Result = "ERROR";
+                result.Message = ex.Message;
+            }
+            return result;
+        }
     }
 
 }

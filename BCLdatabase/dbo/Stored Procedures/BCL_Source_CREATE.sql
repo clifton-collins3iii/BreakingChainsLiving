@@ -12,8 +12,8 @@ BEGIN
 	SET NOCOUNT ON;
 	Declare
 		@PK_Source_Id As Integer = Null,	-- JSON_VALUE(@Request, '$.PK_Building_Id'),
-		@Source_Name As varchar(32) =JSON_VALUE(@Request, '$.Name_Short'),
-		@SourceDescription as varchar(512) = JSON_VALUE(@Request, '$.Description'),
+		@Source_Name As varchar(32) =JSON_VALUE(@Request, '$.Source_Name'),
+		@SourceDescription as varchar(512) = JSON_VALUE(@Request, '$.SourceDescription'),
 		@AddressStreet as varchar(64) = JSON_VALUE(@Request, '$.AddressStreet'),
 		@AddressUnit as varchar(32) = JSON_VALUE(@Request, '$.AddressUnit'),
 		@AddressCity as varchar(36) = JSON_VALUE(@Request, '$.AddressCity'),

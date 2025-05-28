@@ -38,6 +38,12 @@ namespace BCLservice.ServiceModel
         public string PK_Building_Id { get; set; }
     }
 
+    [Route("/jTableOptions/ContactOptionsSelect")]
+    public class jContactOptions_Request : IReturn<jTableOptionsResponse>
+    {
+        public string PK_Source_Id { get; set; }
+    }
+
     public class jTableOptionsResponse
     {
         public string Result { get; set; }

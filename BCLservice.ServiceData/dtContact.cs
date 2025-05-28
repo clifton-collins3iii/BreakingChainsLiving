@@ -20,25 +20,25 @@ namespace BCLservice.ServiceData
 
     namespace BCLservice.ServiceData
     {
-        public class dtSource
+        public class dtContact
         {
             private string _connectionstring = ConfigurationManager.ConnectionStrings["BCLservice.Properties.Settings.dbconnection"].ConnectionString;
             private SqlConnection _connection;
 
-            public dtSource()
+            public dtContact()
             {
 
             }
 
 
-            public static List<SourceObject> returnSourceObject()
+            public static List<ContactObject> returnContactObject()
             {
-                SourceObject obj = new SourceObject();
-                List<SourceObject> results = new List<SourceObject>();
+                ContactObject obj = new ContactObject();
+                List<ContactObject> results = new List<ContactObject>();
                 string _connectionstring = ConfigurationManager.ConnectionStrings["BCLservice.Properties.Settings.dbconnection"].ConnectionString;
                 SqlConnection _connection = new SqlConnection(_connectionstring);
                 BclDbConnection conn = new BclDbConnection();
-                SqlCommand scmd = new SqlCommand("BCL_Source_Select", _connection);
+                SqlCommand scmd = new SqlCommand("BCL_Contact_Select", _connection);
                 DataTable dt = new DataTable();
                 SqlDataAdapter td = new SqlDataAdapter(scmd);
                 _connection.Open();
@@ -47,10 +47,12 @@ namespace BCLservice.ServiceData
                 {
                     foreach (DataRow dr in dt.Rows)
                     {
-                        obj = new SourceObject();
-                        obj.PK_Source_Id = dr.Field<int>("PK_Source_Id");
-                        obj.Source_Name = dr.Field<string>("Source_Name");
-                        obj.SourceDescription = dr.Field<string>("SourceDescription");
+                        obj = new ContactObject();
+                        obj.PK_Contact_Id = dr.Field<int>("PK_Contact_Id");
+                        obj.Name_First = dr.Field<string>("Name_First");
+                        obj.Name_Middle = dr.Field<string>("Name_Middle");
+                        obj.Name_Second = dr.Field<string>("Name_Second");
+                        obj.Description = dr.Field<string>("Description");
                         obj.AddressStreet = dr.Field<string>("AddressStreet");
                         obj.AddressUnit = dr.Field<string>("AddressUnit");
                         obj.AddressCity = dr.Field<string>("AddressCity");
@@ -58,8 +60,6 @@ namespace BCLservice.ServiceData
                         obj.AddressZip = dr.Field<string>("AddressZip");
                         obj.IsActive = dr.Field<bool>("IsActive");
                         obj.IsDeleted = dr.Field<bool>("IsDeleted");
-                        obj.OfficePhoneNumber = dr.Field<string>("OfficePhoneNumber");
-
                         results.Add(obj);
                     }
                 }
@@ -67,14 +67,14 @@ namespace BCLservice.ServiceData
                 return results;
             }
 
-            public static List<SourceObject> updateSourceObject(object request)
+            public static List<ContactObject> updateContactObject(object request)
             {
-                SourceObject obj = new SourceObject();
-                List<SourceObject> results = new List<SourceObject>();
+                ContactObject obj = new ContactObject();
+                List<ContactObject> results = new List<ContactObject>();
                 string _connectionstring = ConfigurationManager.ConnectionStrings["BCLservice.Properties.Settings.dbconnection"].ConnectionString;
                 SqlConnection _connection = new SqlConnection(_connectionstring);
                 BclDbConnection conn = new BclDbConnection();
-                SqlCommand scmd = new SqlCommand("BCL_Source_Update", _connection);
+                SqlCommand scmd = new SqlCommand("BCL_Contact_Update", _connection);
                 scmd.CommandType = CommandType.StoredProcedure;
                 scmd.CommandTimeout = 120;
                 scmd.Parameters.Add(new SqlParameter("@Request", JsonConvert.SerializeObject(request)));
@@ -86,10 +86,12 @@ namespace BCLservice.ServiceData
                 {
                     foreach (DataRow dr in dt.Rows)
                     {
-                        obj = new SourceObject();
-                        obj.PK_Source_Id = dr.Field<int>("PK_Source_Id");
-                        obj.Source_Name = dr.Field<string>("Source_Name");
-                        obj.SourceDescription = dr.Field<string>("SourceDescription");
+                        obj = new ContactObject();
+                        obj.PK_Contact_Id = dr.Field<int>("PK_Contact_Id");
+                        obj.Name_First = dr.Field<string>("Name_First");
+                        obj.Name_Middle = dr.Field<string>("Name_Middle");
+                        obj.Name_Second = dr.Field<string>("Name_Second");
+                        obj.Description = dr.Field<string>("Description");
                         obj.AddressStreet = dr.Field<string>("AddressStreet");
                         obj.AddressUnit = dr.Field<string>("AddressUnit");
                         obj.AddressCity = dr.Field<string>("AddressCity");
@@ -97,8 +99,6 @@ namespace BCLservice.ServiceData
                         obj.AddressZip = dr.Field<string>("AddressZip");
                         obj.IsActive = dr.Field<bool>("IsActive");
                         obj.IsDeleted = dr.Field<bool>("IsDeleted");
-                        obj.OfficePhoneNumber = dr.Field<string>("OfficePhoneNumber");
-                        obj.OfficeEmailAddress = dr.Field<string>("OfficeEmailAddress");
                         results.Add(obj);
                     }
                 }
@@ -106,13 +106,13 @@ namespace BCLservice.ServiceData
                 return results;
             }
 
-            public static SourceObjectRow createSourceObject(object request)
+            public static ContactObjectRow createContactObject(object request)
             {
-                SourceObjectRow obj = new SourceObjectRow();
+                ContactObjectRow obj = new ContactObjectRow();
                 string _connectionstring = ConfigurationManager.ConnectionStrings["BCLservice.Properties.Settings.dbconnection"].ConnectionString;
                 SqlConnection _connection = new SqlConnection(_connectionstring);
                 BclDbConnection conn = new BclDbConnection();
-                SqlCommand scmd = new SqlCommand("BCL_Source_Create", _connection);
+                SqlCommand scmd = new SqlCommand("BCL_Contact_Create", _connection);
                 scmd.CommandType = CommandType.StoredProcedure;
                 scmd.CommandTimeout = 120;
                 scmd.Parameters.Add(new SqlParameter("@Request", JsonConvert.SerializeObject(request)));
@@ -124,9 +124,11 @@ namespace BCLservice.ServiceData
                 {
                     foreach (DataRow dr in dt.Rows)
                     {
-                        obj.PK_Source_Id = dr.Field<int>("PK_Source_Id");
-                        obj.Source_Name = dr.Field<string>("Source_Name");
-                        obj.SourceDescription = dr.Field<string>("SourceDescription");
+                        obj.PK_Contact_Id = dr.Field<int>("PK_Contact_Id");
+                        obj.Name_First = dr.Field<string>("Name_First");
+                        obj.Name_Middle = dr.Field<string>("Name_Middle");
+                        obj.Name_Second = dr.Field<string>("Name_Second");
+                        obj.Description = dr.Field<string>("Description");
                         obj.AddressStreet = dr.Field<string>("AddressStreet");
                         obj.AddressUnit = dr.Field<string>("AddressUnit");
                         obj.AddressCity = dr.Field<string>("AddressCity");
@@ -134,22 +136,20 @@ namespace BCLservice.ServiceData
                         obj.AddressZip = dr.Field<string>("AddressZip");
                         obj.IsActive = dr.Field<bool>("IsActive");
                         obj.IsDeleted = dr.Field<bool>("IsDeleted");
-                        obj.OfficePhoneNumber = dr.Field<string>("OfficePhoneNumber");
-                        obj.OfficeEmailAddress = dr.Field<string>("OfficeEmailAddress");
                     }
                 }
 
                 return obj;
             }
 
-            public static List<SourceObject> deleteSourceObject(object request)
+            public static List<ContactObject> deleteContactObject(object request)
             {
-                SourceObject obj = new SourceObject();
-                List<SourceObject> results = new List<SourceObject>();
+                ContactObject obj = new ContactObject();
+                List<ContactObject> results = new List<ContactObject>();
                 string _connectionstring = ConfigurationManager.ConnectionStrings["BCLservice.Properties.Settings.dbconnection"].ConnectionString;
                 SqlConnection _connection = new SqlConnection(_connectionstring);
                 BclDbConnection conn = new BclDbConnection();
-                SqlCommand scmd = new SqlCommand("BCL_Source_Delete", _connection);
+                SqlCommand scmd = new SqlCommand("BCL_Contact_Delete", _connection);
                 scmd.CommandType = CommandType.StoredProcedure;
                 scmd.CommandTimeout = 120;
                 scmd.Parameters.Add(new SqlParameter("@Request", JsonConvert.SerializeObject(request)));

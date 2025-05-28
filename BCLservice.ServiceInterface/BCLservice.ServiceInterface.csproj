@@ -33,18 +33,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="mscorlib" />
-    <Reference Include="ServiceStack, Version=4.0.3.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>lib\ServiceStack.dll</HintPath>
-    </Reference>
-    <Reference Include="ServiceStack.Common, Version=4.0.3.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>lib\ServiceStack.Common.dll</HintPath>
-    </Reference>
-    <Reference Include="ServiceStack.Interfaces, Version=4.0.0.0, Culture=neutral, PublicKeyToken=e06fbc6124f57c43, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>lib\ServiceStack.Interfaces.dll</HintPath>
-    </Reference>
     <Reference Include="ServiceStack.OrmLite, Version=4.0.2.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>lib\ServiceStack.OrmLite.dll</HintPath>
@@ -59,10 +47,6 @@
     </Reference>
     <Reference Include="ServiceStack.ServiceInterface">
       <HintPath>lib\ServiceStack.ServiceInterface.dll</HintPath>
-    </Reference>
-    <Reference Include="ServiceStack.Text, Version=4.0.3.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>lib\ServiceStack.Text.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -84,11 +68,13 @@
     <Compile Include="AppVersions_Service.cs" />
     <Compile Include="BuildingRoomResident_Service.cs" />
     <Compile Include="BuildingRoom_Service.cs" />
+    <Compile Include="Contact_Service.cs" />
     <Compile Include="Resident_Service.cs" />
     <Compile Include="Building_Service.cs" />
     <Compile Include="Hello_Service.cs" />
     <Compile Include="jTableOptions_Services.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Source_Service.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BCLservice.ServiceData\BCLservice.ServiceData.csproj">

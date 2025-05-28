@@ -6,48 +6,29 @@
         //See the "welcome" module for an example of function export.
         var isLoading = ko.observable(false);
         var webServiceURL = ko.observable(sessionStorage.getItem('WebService'));
-        var showRooms = ko.observable(false);
+        var showContacts = ko.observable(false);
         var stateOptionsArray;
-        var roomOptionsArray;
+        var contactOptionsArray;
         var rentpaymentOptionsArray;
-        var buildingselected;
+        var sourceselected;
 
         var stateOptionsJSON = function (data) {
             return stateOptionsArray;
             //return [{ Value: '1', DisplayText: 'Admin Office' }, { Value: '5', DisplayText: 'Dartmoor' }, { Value: '6', DisplayText: 'Next2' }];
         }
 
-        var roomOptionsJSON = function (data) {
-            return roomOptionsArray;
+        var contactOptionsJSON = function (data) {
+            return contactOptionsArray;
         }
-
-        var rentpaymentfrequencyOptionsJSON = function (data) {
-            return rentpaymentOptionsArray;
-            //return [{ Value: '1', DisplayText: 'Admin Office' }, { Value: '5', DisplayText: 'Dartmoor' }, { Value: '6', DisplayText: 'Next2' }];
-        }
-
         var activate = function () {
             //the router's activator calls this function and waits for it to complete before proceding
             $.ajax({
                 url: webServiceURL() + '/jTableOptions/StateOptionsSelect',     //  ?' + postData,
                 type: 'POST',
                 dataType: 'json',
-                success: function (data) {      // {"Result":"OK", "Options":[{"DisplayText": "", "Value":"FK_Building_ID"}, {}, {}]}
-                    //buildingOptionsArray = JSON.stringify(data.Options);
+                success: function (data) {      // {"Result":"OK", "Options":[{"DisplayText": "", "Value":"FK_Source_ID"}, {}, {}]}
+                    //sourceOptionsArray = JSON.stringify(data.Options);
                     stateOptionsArray = data.Options;
-                },
-                error: function (request, error, exception) {
-
-                }
-            });
-
-            $.ajax({
-                url: webServiceURL() + '/jTableOptions/RentPaymentFrequencyOptionsSelect',     //  ?' + postData,
-                type: 'POST',
-                dataType: 'json',
-                success: function (data) {      // {"Result":"OK", "Options":[{"DisplayText": "", "Value":"FK_Building_ID"}, {}, {}]}
-                    //buildingOptionsArray = JSON.stringify(data.Options);
-                    rentpaymentOptionsArray = data.Options;
                 },
                 error: function (request, error, exception) {
 
@@ -55,50 +36,47 @@
             });
         }
 
-        
-        var BuildingRoomResidentControl = function (dto) {
-            $('#BuildingRoomResidentTableContainer').jtable({
-                title: 'Rooms and Residents',
+        var getcontactOptionsJSON = function (data) {
+            sourceselected = data.PK_Source_Id;
+            var DTO = {
+                PK_Source_Id: data.PK_Source_Id
+            }
+            $.ajax({
+                url: webServiceURL() + '/jTableOptions/ContactOptionsSelect',     //  ?' + postData,
+                type: 'POST',
+                dataType: 'json',
+                data: JSON.stringify(DTO),
+                success: function (data) {      // {"Result":"OK", "Options":[{"DisplayText": "", "Value":"FK_Building_ID"}, {}, {}]}
+                    //buildingOptionsArray = JSON.stringify(data.Options);
+                    contactOptionsArray = data.Options;
+                },
+                error: function (request, error, exception) {
+
+                }
+            });
+        }
+
+        var SourceContactsControl = function (dto) {
+            $('#SourceContactsTableContainer').jtable({
+                title: 'contacts',
                 actions: {
-                    listAction: buildingroomresidentselect,
-                    createAction: buildingroomresidentcreate,
-                    updateAction: buildingroomresidentupdate,
-                    deleteAction: buildingroomresidentdelete
+                    listAction: sourcecontactselect,
+                    createAction: sourcecontactcreate,
+                    updateAction: sourcecontactupdate,
+                    deleteAction: sourcecontactdelete
                 },
                 messages: {
                     deleteConfirmation: 'Edit/Update the Deleted Flag\r\nPressing DELETE is permanent!',
                 },
                 fields: {
-                    PK_RoomResident_Id: {
+                    PK_contact_Id: {
                         key: true,
                         list: false
                     },
-                    FK_BuildingRoom_Id: {
-                        title: 'Room Name',
+                    FK_Sourcecontact_Id: {
+                        title: 'contact Name',
                         width: '10%',
-                        options: roomOptionsJSON
-                    },
-                    FK_Resident_Id: {
-                        title: 'Resident Name',
-                        width: '10%',
-                        options: residentOptionsJSON,
-                        //display: function (data) {
-                        //    if (data.record.FK_Resident_Id == 0) {
-                        //        return '<span style="background-color: yellow">Vacant</span>'
-                        //    } else {
-                        //        return data.record.FK_Resident_Id;
-                        //    }
-                        //}
-                    },
-                    RentPaymentFrequency: {
-                        title: 'Payment Period',
-                        width: '5%',
-                        options: rentpaymentfrequencyOptionsJSON
-                    },
-                    RentPaymentAmount: {
-                        title: 'Payment Amount',
-                        width: '5%',
-                        defaultvalue: 0
+                        options: contactOptionsJSON
                     },
                     EffectiveDate: {
                         title: 'Effective Date',
@@ -119,13 +97,6 @@
                         type: 'checkbox',
                         values: { 'false': 'Inactive', 'true': 'Active' },
                         defaultValue: true,
-                        display: function (data) {
-                            if (data.record.FK_Resident_Id == 0  && data.record.IsActive == true) {
-                                return '<span style="background-color: yellow">Vacant</span>'
-                            } else {
-                                return data.record.IsActive;
-                            }
-                        }
                     },
                     IsDeleted: {
                         title: 'Deleted',
@@ -142,24 +113,24 @@
                     });
                 },
             })
-            $('#BuildingRoomResidentTableContainer').jtable('load');
-            //$('#BuildingRoomResidentTableContainer').show();
-            showRooms(true);
+            $('#SourceContactsTableContainer').jtable('load');
+            //$('#SourceContactsTableContainer').show();
+            showContacts(true);
             return true;
         }
 
         var compositionComplete = function () {
-            $('#BuildingTableContainer').jtable({
-                title: 'Building Edit',
+            $('#SourceTableContainer').jtable({
+                title: 'Source Edit',
                 selecting: true, //Enable selecting
                 multiselect: false, //Allow multiple selecting
                 selectingCheckboxes: true, //Show checkboxes on first column
                 selectOnRowClick: true, //Enable this to only select using checkboxes
                 actions: {
-                    listAction: buildingselect,     // this calls the javascript function buildingselect() below
-                    createAction: buildingcreate,
-                    updateAction: buildingupdate,
-                    deleteAction: buildingdelete,
+                    listAction: sourceselect,     // this calls the javascript function sourceselect() below
+                    createAction: sourcecreate,
+                    updateAction: sourceupdate,
+                    deleteAction: sourcedelete,
                 },
                 messages: {
                     deleteConfirmation: 'Edit/Update the Deleted Flag\r\nPressing DELETE is permanent!',
@@ -182,26 +153,22 @@
                             icon: '/Content/images/refreshred16.png',
                             text: 'REFRESH',
                             click: function () {
-                                $('#BuildingTableContainer').jtable('reload');
+                                $('#SourceTableContainer').jtable('reload');
                             }
                         }
                     ]
                 },
                 fields: {
-                    PK_Building_Id: {
+                    PK_Source_Id: {
                         key: true,
                         list: false
                     },
-                    Name_Short: {
-                        title: 'Building Short Name',
+                    Source_Name: {
+                        title: 'Source Name',
                         width: '10%'
                     },
-                    Name_Long: {
-                        title: 'Building Long Name',
-                        width: '10%'
-                    },
-                    Description: {
-                        title: 'Description of the building',
+                    SourceDescription: {
+                        title: 'Description of the source',
                         width: '20%'
                     },
                     AddressStreet: {
@@ -249,7 +216,7 @@
                 //Register to selectionChanged event to hanlde events
                 selectionChanged: function () {
                     //Get all selected rows
-                    var $selectedRows = $('#BuildingTableContainer').jtable('selectedRows');
+                    var $selectedRows = $('#SourceTableContainer').jtable('selectedRows');
 
                     $('#SelectedRowList').empty();
                     if ($selectedRows.length > 0) {
@@ -261,30 +228,31 @@
                                 //'<br /><b>Name</b>:' + record.Name + '<br /><br />'
                             //);
                             //
-                            //  show room - resident table
-                            //BuildingRoomResidentControl(record);
+                            //  show contact - resident table
+                            getcontactOptionsJSON(record);
+                            //SourceContactsControl(record);
                         });
                     } else {
                         //No rows selected
                         //$('#SelectedRowList').append('No row selected! Select rows to see here...');
                         //
-                        //  hide the room - resident table
-                        //$('#BuildingRoomResidentTableContainer').hide();
-                        showRooms(false);
+                        //  hide the contact - resident table
+                        //$('#SourceContactsTableContainer').hide();
+                        showContacts(false);
                     }
                 },
             });
-            $('#BuildingTableContainer').jtable('load');
+            $('#SourceTableContainer').jtable('load');
             return true;
         };
 
         //  Used by jTable deleteAction method
-        var buildingdelete = function (postData, jtParams) {
-            var r = confirm('Do you wish to delete ALL rooms and associated invoices ?');
+        var sourcedelete = function (postData, jtParams) {
+            var r = confirm('Do you wish to delete ALL contacts and associated invoices ?');
             if (r == true) {
                 return $.Deferred(function ($dfd) {
                     $.ajax({
-                        url: webServiceURL() + '/jTable/BuildingDelete',
+                        url: webServiceURL() + '/jTable/SourceDelete',
                         type: 'POST',
                         dataType: 'json',
                         data: postData,
@@ -306,7 +274,7 @@
                 //});
                 return $.Deferred(function ($dfd) {
                     $.ajax({
-                        url: webServiceURL() + '/jTable/NopBuilding',
+                        url: webServiceURL() + '/jTable/NopSource',
                         type: 'POST',
                         dataType: 'json',
                         data: postData,
@@ -323,10 +291,11 @@
         }
 
         //  Used by jTable createAction method
-        var buildingcreate = function (postData, jtParams) {
+        var sourcecreate = function (postData, jtParams) {
+            var ph = 0;
             return $.Deferred(function ($dfd) {
                 $.ajax({
-                    url: webServiceURL() + '/jTable/BuildingCreate',
+                    url: webServiceURL() + '/jTable/SourceCreate',
                     type: 'POST',
                     dataType: 'json',
                     data: postData,
@@ -341,10 +310,10 @@
         }
 
         //  Used by jTable updateAction method
-        var buildingupdate = function (postData, jtParams) {
+        var sourceupdate = function (postData, jtParams) {
             return $.Deferred(function ($dfd) {
                 $.ajax({
-                    url: webServiceURL() + '/jTable/BuildingUpdate',
+                    url: webServiceURL() + '/jTable/SourceUpdate',
                     type: 'POST',
                     dataType: 'json',
                     data: postData,
@@ -359,10 +328,10 @@
         }
 
         //  Used by jTable listAction method
-        var buildingselect = function (postData, jtParams) {
+        var sourceselect = function (postData, jtParams) {
             return $.Deferred(function ($dfd) {
                 $.ajax({
-                    url: webServiceURL() + '/jTable/BuildingSelect',     //  ?' + postData,
+                    url: webServiceURL() + '/jTable/SourceSelect',     //  ?' + postData,
                     type: 'POST',
                     dataType: 'json',
                     data: postData,
@@ -376,30 +345,13 @@
             });
         }
 
-        var buildingselect = function (postData, jtParams) {
-            return $.Deferred(function ($dfd) {
-                $.ajax({
-                    url: webServiceURL() + '/jTable/BuildingSelect',     //  ?' + postData,
-                    type: 'POST',
-                    dataType: 'json',
-                    data: postData,
-                    success: function (data) {
-                        $dfd.resolve(data);
-                    },
-                    error: function (request, error, exception) {
-                        $dfd.reject();
-                    }
-                });
-            });
-        }
-
-        var buildingroomresidentselect = function (postData, jtParams) {
+        var sourcecontactselect = function (postData, jtParams) {
             var DTO = {
-                FK_Building_Id: buildingselected
+                FK_Source_Id: sourceselected
             }
             return $.Deferred(function ($dfd) {
                 $.ajax({
-                    url: webServiceURL() + '/jTable/BuildingRoomResidentSelect',     //  ?' + postData,
+                    url: webServiceURL() + '/jTable/SourceContactsSelect',     //  ?' + postData,
                     type: 'POST',
                     dataType: 'json',
                     data: DTO,
@@ -413,10 +365,10 @@
             });
         }
 
-        var buildingroomresidentcreate = function (postData, jtParams) {
+        var sourcecontactcreate = function (postData, jtParams) {
             return $.Deferred(function ($dfd) {
                 $.ajax({
-                    url: webServiceURL() + '/jTable/BuildingRoomResidentCreate',     //  ?' + postData,
+                    url: webServiceURL() + '/jTable/SourceContactsCreate',     //  ?' + postData,
                     type: 'POST',
                     dataType: 'json',
                     data: postData,
@@ -430,12 +382,12 @@
             });
         }
 
-        var buildingroomresidentdelete = function (postData, jtParams) {
-            var r = confirm('Do you wish to delete this room-resident relationship ?');
+        var sourcecontactdelete = function (postData, jtParams) {
+            var r = confirm('Do you wish to delete this source - contact relationship ?');
             if (r == true) {
                 return $.Deferred(function ($dfd) {
                     $.ajax({
-                        url: webServiceURL() + '/jTable/BuildingRoomResidentDelete',
+                        url: webServiceURL() + '/jTable/SourceContactsDelete',
                         type: 'POST',
                         dataType: 'json',
                         data: postData,
@@ -457,7 +409,7 @@
                 //});
                 return $.Deferred(function ($dfd) {
                     $.ajax({
-                        url: webServiceURL() + '/jTable/NopBuilding',
+                        url: webServiceURL() + '/jTable/NopSource',
                         type: 'POST',
                         dataType: 'json',
                         data: postData,
@@ -473,10 +425,10 @@
 
         }
 
-        var buildingroomresidentupdate = function (postData, jtParams) {
+        var sourcecontactupdate = function (postData, jtParams) {
             return $.Deferred(function ($dfd) {
                 $.ajax({
-                    url: webServiceURL() + '/jTable/BuildingRoomResidentUpdate',     //  ?' + postData,
+                    url: webServiceURL() + '/jTable/SourceContactsUpdate',     //  ?' + postData,
                     type: 'POST',
                     dataType: 'json',
                     data: postData,
@@ -489,8 +441,6 @@
                 });
             });
         }
-
-
 
         var jtableCallback = function (evt) {
             isLoading(true);
@@ -507,14 +457,13 @@
             return app.showMessage('Are you sure you want to leave this page?', 'Navigate', ['Yes', 'No']);
         };
 
-
     return {
-        displayName: 'Building',
+        displayName: 'Source',
         images: ko.observableArray([]),
         isLoading: isLoading,
         activate: activate,
         compositionComplete: compositionComplete,
         webServiceURL: webServiceURL,
-        showRooms: showRooms,
+        showContacts: showContacts,
     };
 });
